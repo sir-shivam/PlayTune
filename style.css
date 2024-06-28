@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.message{
+    width: 350px;
+    height: 200px;
+    border: 2px solid black;
+    margin-top: 250px;
+    align-content: center;
+    font-size: larger;
+    
+}
