@@ -1,4 +1,3 @@
-import './App.css';
 import Nav from './components/nav';
 import { BrowserRouter, Route , Routes} from 'react-router-dom';
 import SignUp from './components/signUp';
