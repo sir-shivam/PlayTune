@@ -1,4 +1,4 @@
-.Nav-ul li{
+/* .Nav-ul li{
   display: inline-block;
   padding: 10px;
 }
@@ -9,6 +9,10 @@
   padding: 7px;
   width: 300px;
   border: 1px solid skyblue;
+}
+
+.Nav-ul a{
+  text-decoration: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -39,4 +43,8 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
