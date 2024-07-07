@@ -11,7 +11,8 @@ const PrivateComponent = () => {
             return <Outlet />;
         }   
         else{
-            return <Navigate to="/signUp" />;
+            // return <Navigate to="/signUp" />;
+            return <Outlet />;
         }
 
 }

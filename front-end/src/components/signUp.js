@@ -37,8 +37,8 @@ const SignUp = ()=> {
             value={name} onChange={(e) =>setName(e.target.value)} placeholder='Enter Name' />
 
             <div  ></div> */}
-
-            <div className='full w-screen h-screen bg-[#0f0f0f] flex'>
+            
+            <div className='full w-screen h-screen bg-[#0f0f0f] flex'>  
                 <div className='w-[880px] h-[680px] mt-9 flex justify-center items-center relative'>
                     <div>
                 <p className='text-[5rem] text-white '>Welcome Back.!</p>
@@ -54,10 +54,10 @@ const SignUp = ()=> {
                 
                 
 
-                <input className='inputBox w-[75%] h-12 m-[15px] rounded-xl bg-transparent border  pl-3 ' type='text' 
+                <input className='inputBox w-[75%] h-12 m-[15px] rounded-xl bg-transparent border  pl-3  text-white ' type='text' 
                 value={email} onChange={(e) =>setemail(e.target.value)} placeholder='Enter Email' />
             
-                <input className='inputBox w-[75%] h-12 m-[15px] rounded-xl bg-transparent border   pl-3' type='Password' 
+                <input className='inputBox w-[75%] h-12 m-[15px] rounded-xl bg-transparent border   pl-3 text-white ' type='Password' 
                 value={password} onChange={(e) =>setPassword(e.target.value)} placeholder='Enter Password' />
 
                 <div className='flex mb-2 ml-[-48%]'>
