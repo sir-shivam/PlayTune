@@ -5,11 +5,13 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 const passport = require("passport");
 const authRoutes = require("./db/state");
 const songRoutes = require("./db/music");
+const listRoutes = require("./db/list");
 const mongoose = require("mongoose");
 
 
 require("./db/config");
 const User = require("./db/User");
+const Song = require("./db/Song");
 
 
 
@@ -21,12 +23,12 @@ app.use(cors());
 //Authentication
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = "secret_key"; // Use environment variables for secrets
+opts.secretOrKey = "secret_key"; 
 
 passport.use(new JwtStrategy(opts, async (jwt_payload, done) => {
   try {
     console.log(jwt_payload);
-    const user = await User.findOne({_id:jwt_payload.userId}); // Use async/await for clarity
+    const user = await User.findOne({_id:jwt_payload.userId}); 
     if (user) {
       return done(null, user);
     } else {
@@ -36,6 +38,7 @@ passport.use(new JwtStrategy(opts, async (jwt_payload, done) => {
     return done(err, false);
   }
 }));
+
 
 
 app.get("/view" , async (req,resp) =>{
@@ -52,6 +55,7 @@ app.get("/view" , async (req,resp) =>{
 
 app.use("/auth", authRoutes);
 app.use("/song", passport.authenticate("jwt", { session: false }),songRoutes);
+app.use("/playlist",passport.authenticate("jwt", { session: false }),listRoutes);
 
 
 app.listen(4000);

@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {Navigate, useNavigate} from "react-router-dom"; 
+import { Link, useNavigate} from "react-router-dom"; 
+import { unauthPost } from '../utils/serverFetch';
+import { useCookies } from 'react-cookie';
 
 const SignUp = ()=> {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [email, setemail] = useState("");
+    const [cookie, setCookie] = useCookies(["token"]);
     const navigate = useNavigate();
 
     useEffect(()=> {
@@ -16,32 +19,33 @@ const SignUp = ()=> {
     })
 
     const collectData = async () => {
-        console.log(name, email, password);
-        let result = await fetch("http://localhost:4000/register", {
-            method: "post",
-            body: JSON.stringify({name,email,password}),
-            headers: {
-                "Content-Type":"application/json"
-            },
-        });
-        result = await result.json();
-        console.warn(result);
-        localStorage.setItem("user",JSON.stringify(result));
-        navigate("/");
+        const data={name, email, password};
+        const respose =await unauthPost("/auth/register", data )
+        
+        if(respose && !respose.err){
+            console.log(respose);
+            const token = respose.token;
+            const date = new Date();
+            date.setDate(date.getDate() + 1);
+            setCookie("token", token , {path: "/" , expires: date});
+            alert("success");
+            navigate("/");
+        }
+        else{
+            alert("failed");
+        }
+        
     }
 
     return(
         <div>
-            {/* <h1>Register</h1>
-            <input className='inputBox' type='text'  
-            value={name} onChange={(e) =>setName(e.target.value)} placeholder='Enter Name' />
-
-            <div  ></div> */}
+        
             
             <div className='full w-screen h-screen bg-[#0f0f0f] flex'>  
                 <div className='w-[880px] h-[680px] mt-9 flex justify-center items-center relative'>
                     <div>
-                <p className='text-[5rem] text-white '>Welcome Back.!</p>
+                <p className='text-[#628eff]  text-[4rem] mb-[-4%] ' >D-Tune</p>
+                <p className='text-[5rem] text-white  '>Welcomes You !!</p>
                 {/* <p className='text-[1.3rem] text-white underline mt-[-4%] ml-[1rem] '>Play the Beat !!</p> */}
                 </div>
                     <div className='w-[302px] h-[302px]   rounded-[50%] bg-gradient-to-b from-[#430356] to-[#0f0f0f] absolute ml-[90%] mt-[-52%]  '  ></div>
@@ -49,23 +53,33 @@ const SignUp = ()=> {
                  </div>
                 <div className='frame1 w-[480px] h-[680px] border-[0.1px]  rounded-2xl end mt-14  z-[2] flex flex-col justify-center items-center'>
 
-                <div className='status text-3xl text-white ml-[-56%] ' >LogIn</div>
-                <div className='status text-sm text-white mb-2 ml-[-52%] ' >Will have Fun!</div>
+                <div className='status text-3xl text-white ml-[45%] ' >Sign In...</div>
+                <div className='status text-sm text-white mb-2 ml-[52%] ' >Will have Fun!</div>
                 
                 
-
+                <label  className='text-white ml-[-56%] mb-[-2%]  ' >Enter Name</label>
                 <input className='inputBox w-[75%] h-12 m-[15px] rounded-xl bg-transparent border  pl-3  text-white ' type='text' 
-                value={email} onChange={(e) =>setemail(e.target.value)} placeholder='Enter Email' />
+                value={name} onChange={(e) =>setName (e.target.value)} placeholder='Enter Name' id="name" />
+
+
+                <label className='text-white ml-[-56%] mb-[-2%]  ' >Enter Email</label>
+                <input className='inputBox w-[75%] h-12 m-[15px] rounded-xl bg-transparent border  pl-3  text-white ' type='text' 
+                value={email} onChange={(e) =>setemail(e.target.value)} placeholder='Enter Email' id="email"  />
             
+                <label className='text-white ml-[-49%] mb-[-2%]  ' >Create Password</label>
                 <input className='inputBox w-[75%] h-12 m-[15px] rounded-xl bg-transparent border   pl-3 text-white ' type='Password' 
-                value={password} onChange={(e) =>setPassword(e.target.value)} placeholder='Enter Password' />
+                value={password} onChange={(e) =>setPassword(e.target.value)} placeholder='Enter Password' id="password" />
 
                 <div className='flex mb-2 ml-[-48%]'>
                 <input className='inline-block' type="checkbox" id="remember-me" name="remember-me" />
                 <label for="remember-me"  className='text-white inline-block'>Remember me</label>
                 </div>
             
-                <button className=" text-white w-[75%] h-12 m-[15px] rounded-xl bg-transparent bg-gradient-to-r from-[#628eff] to-[#430356] " onClick={collectData} type='button'>Sign Up/ LogIn</button>
+                <button className=" text-white w-[75%] h-12 m-[15px] rounded-xl bg-transparent bg-gradient-to-r from-[#628eff] to-[#430356] " onClick={(e)=>{
+                    e.preventDefault(); collectData();
+                 }  } type='button'>Sign Up</button>
+
+                <div className='registered text-white flex  ml-[78px] '>Already have a Account? <p className='ml-2 text-[#628eff] ' ><Link to="/auth/login">Log In... </Link> </p> </div>
             
                 </div>
 

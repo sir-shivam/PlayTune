@@ -3,8 +3,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const User = require("./User");
-const { getToken } = require('../Check/token');
-
 
 
 const generateToken = (email, userId) => {
@@ -31,6 +29,7 @@ router.post('/register', async (req, res) => {
           const token = generateToken(email,  newUserData._id); // Replace with appropriate ID field
           const userToReturn = { ...newUserData.toJSON(), token };
           delete userToReturn.password;
+          console.log(userToReturn);
           res.status(201).json(userToReturn);
 
     }

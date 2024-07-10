@@ -25,5 +25,17 @@ router.get("/get/mysongs", async (req,res) =>{
 } );
 
 
+router.get("/get/artist/:artistId", async (req,res) => {
+    const {artistId} = req.params.artistId;
+    const songs = await Song.find({artist: artistId});
+    return res.status(200).json(songs);
+});
+
+router.get("/get/name/:songName" , async (req, res) => {
+    const {songName} = req.params.songName;
+    let songs = await Song.findOne({name: songName});
+    return res.status(200).json(songs);
+} )
+
 
 module.exports = router;
