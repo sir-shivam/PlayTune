@@ -50,6 +50,7 @@ app.get("/view" , async (req,resp) =>{
     const data = await User.find();
     console.log(data);
     resp.send(data);
+    
 })
 
 

@@ -10,14 +10,6 @@ const SignUp = ()=> {
     const [cookie, setCookie] = useCookies(["token"]);
     const navigate = useNavigate();
 
-    useEffect(()=> {
-        const auth = localStorage.getItem("user");
-        if(auth)
-        {
-            navigate("/")
-        }
-    })
-
     const collectData = async () => {
         const data={name, email, password};
         const respose =await unauthPost("/auth/register", data )
@@ -29,7 +21,7 @@ const SignUp = ()=> {
             date.setDate(date.getDate() + 1);
             setCookie("token", token , {path: "/" , expires: date});
             alert("success");
-            navigate("/");
+            navigate("/home");
         }
         else{
             alert("failed");
@@ -79,7 +71,7 @@ const SignUp = ()=> {
                     e.preventDefault(); collectData();
                  }  } type='button'>Sign Up</button>
 
-                <div className='registered text-white flex  ml-[78px] '>Already have a Account? <p className='ml-2 text-[#628eff] ' ><Link to="/auth/login">Log In... </Link> </p> </div>
+                <div className='registered text-white flex  ml-[78px] '>Already have an Account? <p className='ml-2 text-[#628eff] ' ><Link to="/login">Log In... </Link> </p> </div>
             
                 </div>
 

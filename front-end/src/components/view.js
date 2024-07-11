@@ -15,25 +15,70 @@ export default function View() {
                 <div className="text-white m-4 border-2 border-[transparent] hover:border-[white] w-[12%] h-[50%] content-center text-center  rounded-lg    ">Singer</div>
             </div>
                     <div className='ml-5 w-[98%] flex  h-[40%] '>
-                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 '   ></div>
-                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 '   ></div>
-                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 '   ></div>
-                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 '   ></div>
-                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 '   ></div>
+                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 flex flex-col items-center '   >
+                      <div className={`border w-[50%] h-[40%]  rounded-lg  m-2`} ></div>
+                      <div className='border w-[80%] h-[50%]  ' ></div>
+                    </div>
+                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 flex flex-col items-center '   >
+                      <div className={`border w-[50%] h-[40%]  rounded-lg  m-2`} ></div>
+                      <div className='border w-[80%] h-[50%]  ' ></div>
+                    </div>
+                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 flex flex-col items-center '   >
+                      <div className={`border w-[50%] h-[40%]  rounded-lg  m-2`} ></div>
+                      <div className='border w-[80%] h-[50%]  ' ></div>
+                    </div>
+                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 flex flex-col items-center '   >
+                      <div className={`border w-[50%] h-[40%]  rounded-lg  m-2`} ></div>
+                      <div className='border w-[80%] h-[50%]  ' ></div>
+                    </div>
+                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 flex flex-col items-center '   >
+                      <div className={`border w-[50%] h-[40%]  rounded-lg  m-2`} ></div>
+                      <div className='border w-[80%] h-[50%]  ' ></div>
+                    </div>
                     </div>
                     <div className='ml-5 w-[98%] flex  h-[40%] '>
-                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 '   ></div>
-                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 '   ></div>
-                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 '   ></div>
-                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 '   ></div>
-                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 '   ></div>
+                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 flex flex-col items-center '   >
+                      <div className={`border w-[50%] h-[40%]  rounded-lg  m-2`} ></div>
+                      <div className='border w-[80%] h-[50%]  ' ></div>
+                    </div>
+                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 flex flex-col items-center '   >
+                      <div className={`border w-[50%] h-[40%]  rounded-lg  m-2`} ></div>
+                      <div className='border w-[80%] h-[50%]  ' ></div>
+                    </div>
+                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 flex flex-col items-center '   >
+                      <div className={`border w-[50%] h-[40%]  rounded-lg  m-2`} ></div>
+                      <div className='border w-[80%] h-[50%]  ' ></div>
+                    </div>
+                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 flex flex-col items-center '   >
+                      <div className={`border w-[50%] h-[40%]  rounded-lg  m-2`} ></div>
+                      <div className='border w-[80%] h-[50%]  ' ></div>
+                    </div>
+                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 flex flex-col items-center '   >
+                      <div className={`border w-[50%] h-[40%]  rounded-lg  m-2`} ></div>
+                      <div className='border w-[80%] h-[50%]  ' ></div>
+                    </div>
                     </div>
                     <div className='ml-5 w-[98%] flex  h-[40%] '>
-                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 '   ></div>
-                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 '   ></div>
-                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 '   ></div>
-                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 '   ></div>
-                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 '   ></div>
+                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 flex flex-col items-center '   >
+                      <div className={`border w-[50%] h-[40%]  rounded-lg  m-2`} ></div>
+                      <div className='border w-[80%] h-[50%]  ' ></div>
+                    </div>
+                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 flex flex-col items-center '   >
+                      <div className={`border w-[50%] h-[40%]  rounded-lg  m-2`} ></div>
+                      <div className='border w-[80%] h-[50%]  ' ></div>
+                    </div>
+                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 flex flex-col items-center '   >
+                      <div className={`border w-[50%] h-[40%]  rounded-lg  m-2`} ></div>
+                      <div className='border w-[80%] h-[50%]  ' ></div>
+                    </div>
+                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 flex flex-col items-center '   >
+                      <div className={`border w-[50%] h-[40%]  rounded-lg  m-2`} ></div>
+                      <div className='border w-[80%] h-[50%]  ' ></div>
+                    </div>
+                    <div  className='w-[18%]  border h-[75%] rounded-2xl m-4 flex flex-col items-center '   >
+                      <div className={`border w-[50%] h-[40%]  rounded-lg  m-2`} ></div>
+                      <div className='border w-[80%] h-[50%]  ' ></div>
+                    </div>
                     </div>
                     </div>
         </div>

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Navigate, useNavigate} from "react-router-dom"; 
+import {Link,  useNavigate} from "react-router-dom"; 
 
 const Login = ()=> {
     const [name, setName] = useState("");
@@ -17,7 +17,7 @@ const Login = ()=> {
 
     const collectData = async () => {
         console.log(name, email, password);
-        let result = await fetch("http://localhost:4000/register", {
+        let result = await fetch("http://localhost:4000/auth/login", {
             method: "post",
             body: JSON.stringify({name,email,password}),
             headers: {
@@ -37,7 +37,6 @@ const Login = ()=> {
             value={name} onChange={(e) =>setName(e.target.value)} placeholder='Enter Name' />
 
             <div  ></div> */}
-            
             <div className='full w-screen h-screen bg-[#0f0f0f] flex'>  
                 <div className='w-[880px] h-[680px] mt-9 flex justify-center items-center relative'>
                     <div>
@@ -65,8 +64,10 @@ const Login = ()=> {
                 <label for="remember-me"  className='text-white inline-block'>Remember me</label>
                 </div>
             
-                <button className=" text-white w-[75%] h-12 m-[15px] rounded-xl bg-transparent bg-gradient-to-r from-[#628eff] to-[#430356] " onClick={collectData} type='button'>Sign Up/ LogIn</button>
-            
+                <button className=" text-white w-[75%] h-12 m-[15px] rounded-xl bg-transparent bg-gradient-to-r from-[#628eff] to-[#430356] " onClick={collectData} type='button'> LogIn</button>
+                <div className='logged text-white flex  ml-[78px] '>Don't have an Account? <p className='ml-2 text-[#628eff] ' ><Link to="/signUp">Sign Up... </Link> </p> </div>
+                
+
                 </div>
 
             </div>
