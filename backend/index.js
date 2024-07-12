@@ -7,6 +7,7 @@ const authRoutes = require("./db/state");
 const songRoutes = require("./db/music");
 const listRoutes = require("./db/list");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 
 require("./db/config");
@@ -46,7 +47,6 @@ app.get("/view" , async (req,resp) =>{
     mongoose.connect("mongodb://localhost:27017/DTune");
     
     const userSchema = new mongoose.Schema({});
-    // const User1 = mongoose.model("users", userSchema);
     const data = await User.find();
     console.log(data);
     resp.send(data);

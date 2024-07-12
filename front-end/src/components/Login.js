@@ -1,34 +1,32 @@
 import React, {useState, useEffect} from 'react';
+import { useCookies } from 'react-cookie';
 import {Link,  useNavigate} from "react-router-dom"; 
+import { unauthPost } from '../utils/serverFetch';
 
 const Login = ()=> {
-    const [name, setName] = useState("");
-    const [password, setPassword] = useState("");
     const [email, setemail] = useState("");
+    const [password, setPassword] = useState("");
+    const [cookies, setCookie] = useCookies(["token"]);
     const navigate = useNavigate();
 
-    useEffect(()=> {
-        const auth = localStorage.getItem("user");
-        if(auth)
-        {
-            navigate("/")
+    const collectData= async () => {
+        const data = {email, password};
+        const response = await unauthPost(
+            "/auth/login",
+            data
+        );
+        if (response && !response.err) {
+            console.log(response);
+            const token = response.token;
+            const date = new Date();
+            date.setDate(date.getDate() + 30);
+            setCookie("token", token, {path: "/", expires: date});
+            alert("Success");
+            navigate("/home");
+        } else {
+            alert( response.message );
         }
-    })
-
-    const collectData = async () => {
-        console.log(name, email, password);
-        let result = await fetch("http://localhost:4000/auth/login", {
-            method: "post",
-            body: JSON.stringify({name,email,password}),
-            headers: {
-                "Content-Type":"application/json"
-            },
-        });
-        result = await result.json();
-        console.warn(result);
-        localStorage.setItem("user",JSON.stringify(result));
-        navigate("/");
-    }
+    };
 
     return(
         <div>
@@ -49,7 +47,7 @@ const Login = ()=> {
                 <div className='frame1 w-[480px] h-[680px] border-[0.1px]  rounded-2xl end mt-14  z-[2] flex flex-col justify-center items-center'>
 
                 <div className='status text-3xl text-white ml-[-56%] ' >LogIn</div>
-                <div className='status text-sm text-white mb-2 ml-[-52%] ' >Will have Fun!</div>
+                <div className='status text-sm text-white mb-2 ml-[-52%] ' >Enjoy Listening!</div>
                 
                 
 

@@ -13,24 +13,23 @@ const Nav = () => {
     else{
         test1 = false; 
     }
-    console.log(cookie);
     const Autherised = () => {
         return(
-            <>
-            <li className=' w-[80%] h-[8%] content-center pl-8   rounded-xl hover:border  cursor-pointer  '> 
+            <div className=' w-[100%] flex flex-col justify-center items-center ' >
+            <li className=' w-[80%] h-[50px] content-center    rounded-xl hover:border  cursor-pointer pl-[25%] text-sky-500  '> 
             <Link  to="/signUp">Sign Up</Link>
             </li>
-            <li className=' w-[80%] h-[8%] content-center pl-8   rounded-xl hover:border  cursor-pointer  '> 
-            <Link  to="/signUp">Log In</Link>
+            <li className='w-[80%] h-[50px] content-center    rounded-xl hover:border  cursor-pointer pl-[25%] text-sky-500 '> 
+            <Link  to="/login">Log In</Link>
             </li>
-            </>
+            </div>
     )
     }
     
     const  UnAutherised = ()=> {
         return(
         
-            <li className=' w-[80%] h-[8%] content-center pl-8   rounded-xl hover:border  cursor-pointer  '> 
+            <li className=' w-[80%] h-[50px] content-center    rounded-xl hover:border  cursor-pointer pl-[25%] text-sky-500 ml-[10%] '> 
             <Link   onClick={logout} to="/login" >Logout</Link></li>
     )
     }
@@ -66,7 +65,7 @@ const Nav = () => {
                 
                 {/* <li className=' w-[60%] h-[8%]    rounded-xl hover:border  cursor-pointer flex justify-center text-sky-400 '><Link  to="/login" >Login</Link> */}
                 {/* </li> */}
-                <li  >{ test1? (<UnAutherised />)
+                <li className='w-[100%] h-auto '  >{ test1? (<UnAutherised />)
                  :(<Autherised />) } </li>
             </ul> 
             </div>

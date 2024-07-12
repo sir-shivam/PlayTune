@@ -7,6 +7,8 @@ import View from './components/view';
 import Library from './components/Library';
 import Streaming from './components/Streaming';
 import { useCookies } from 'react-cookie';
+import { SongCard } from './components/SongCard';
+import MySong from './components/MySong';
 
 
 function App() {
@@ -17,7 +19,7 @@ function App() {
     
     <div className="App">
       <BrowserRouter>
-      <Streaming/>
+      {/* <Streaming/> */}
       {
         cookie.token ? (
       
@@ -28,7 +30,7 @@ function App() {
         <Route path="/search" element={<Nav/> } />
         <Route path="/logout" element={<Nav />} />
         <Route path="/library" element={<Library />} />
-        <Route path="/mymusic" element={<hello />} />
+        <Route path="/mymusic" element={<MySong/>} />
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
         ):(

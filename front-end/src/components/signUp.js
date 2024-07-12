@@ -16,6 +16,7 @@ const SignUp = ()=> {
         
         if(respose && !respose.err){
             console.log(respose);
+            console.log(respose.token)
             const token = respose.token;
             const date = new Date();
             date.setDate(date.getDate() + 1);
@@ -24,7 +25,7 @@ const SignUp = ()=> {
             navigate("/home");
         }
         else{
-            alert("failed");
+            alert(respose.message);
         }
         
     }
@@ -46,7 +47,7 @@ const SignUp = ()=> {
                 <div className='frame1 w-[480px] h-[680px] border-[0.1px]  rounded-2xl end mt-14  z-[2] flex flex-col justify-center items-center'>
 
                 <div className='status text-3xl text-white ml-[45%] ' >Sign In...</div>
-                <div className='status text-sm text-white mb-2 ml-[52%] ' >Will have Fun!</div>
+                <div className='status text-sm text-white mb-2 ml-[52%] ' >Enjoy Listening!</div>
                 
                 
                 <label  className='text-white ml-[-56%] mb-[-2%]  ' >Enter Name</label>

@@ -4,22 +4,21 @@ const Song = require("./Song");
 const router = express.Router();
 
 router.post("/create", async (req,res) =>{
-
-    const {name , thumbnail , track , artist } = req.body;
-    if(!name || !thumbnail || !track || !artist){
+    const {name , thumbnail , track  } = req.body;
+    if(!name || !thumbnail || !track ){
         return res.status(401).json("try again");
     }
-    // // const artist = req.user._id;
-    const songCreated = await Song.create({name , thumbnail , track, artist}); 
+    const artist = req.user.id;
+    const songCreated = await Song.create({name , thumbnail , track , artist: artist}); 
     return res.status(200).json(songCreated);
     
 } );
 
 router.get("/get/mysongs", async (req,res) =>{
     
-    // const loggedInUser =  req.user;
-    const {artist }=  req.body;
-    const songs = await Song.findOne({artist: artist});
+    const loggedInUser =  req.user
+    console.log(loggedInUser._id);
+    const songs = await Song.find({artist: loggedInUser.id}).populate("artist");
     return res.status(200).json(songs);
 
 } );

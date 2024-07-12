@@ -2,6 +2,10 @@ import React from 'react'
 import Nav from './nav'
 
 export default function Streaming() {
+
+
+
+
   return (
     <div>
         {/* <Nav /> */}
@@ -11,7 +15,7 @@ export default function Streaming() {
             </div>
             <div className='border w-[70%] ml-[5%] flex flex-col justify-around items-center'>
               <div className='border w-[100%] h-[50%]  '  ></div>
-            <input type='range' name='range' min={"0"} max={"100"} className='w-[500px]  mt-[-15px]  ' />
+            <input type='range' name='range' min={"0"} max={"100"} className='w-[90%]  mt-[-15px]  ' />
             <div className='border w-[40%] h-[20%] justify-around flex items-center text-3xl ' > 
             <i class="fa-solid fa-house  "></i>
             <i class="fa-solid fa-house  "></i>

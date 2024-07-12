@@ -1,6 +1,7 @@
 const strict = require('assert/strict');
 const mongoose = require( 'mongoose'); 
 const { type } = require('os');
+const User = require('./User');
 
 const songSchema  = new mongoose.Schema({
     name: {
@@ -16,10 +17,8 @@ const songSchema  = new mongoose.Schema({
         required: true,
     },
     artist: {
-        // type: mongoose.Types.ObjectId,
-        // ref:"users",
-        type : String,
-        required:true,
+        type: mongoose.Types.ObjectId,
+        ref: "users"
     }
 });
 
