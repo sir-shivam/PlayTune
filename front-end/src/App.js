@@ -7,23 +7,25 @@ import View from './components/view';
 import Library from './components/Library';
 import Streaming from './components/Streaming';
 import { useCookies } from 'react-cookie';
-import { SongCard } from './components/SongCard';
+import { player, SongCard } from './components/SongCard';
 import MySong from './components/MySong';
+import { useContext, useState } from 'react';
+import NoteState from './components/noteState';
+import SongContext from './components/context';
 
 
 function App() {
   const [cookie , setCookie] = useCookies(["token"]);
-  console.log(cookie.token);
 
   return (
     
     <div className="App">
       <BrowserRouter>
-      {/* <Streaming/> */}
+      <NoteState>
+      
       {
         cookie.token ? (
       
-
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/music"  element={ <View /> }/>
@@ -35,7 +37,7 @@ function App() {
       </Routes>
         ):(
           <Routes>
-          <Route path="/home" element={<Home />} />
+          {/* <Route path="/home" element={<Home />} /> */}
           <Route path="/signUp" element={<SignUp /> } />
           <Route path='/login' element={<Login/>}/>
           <Route path="*" element={<Navigate to="/login" />} />
@@ -43,6 +45,7 @@ function App() {
           </Routes>
         )
       }
+      </NoteState>
       </BrowserRouter>
     </div>
   );

@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SongCard } from "./SongCard";
 import { Howl ,Howler } from "howler";
 import Nav from "./nav";
 import { authGet } from "../utils/serverFetch";
+import SongContext from "./context";
 
 export default function MySong() {
   const [songData, setSongData] = useState([]);
   const [soundPlayed , setsoundPlayed] = useState(null);
-
   const playSound= (songsrc)=> {
     if(soundPlayed){
       soundPlayed.stop();
@@ -42,7 +42,7 @@ export default function MySong() {
           </div>
           <div className="space-y-3 overflow-auto">
             {songData.map((item) => {
-              return <SongCard info={item} playSound={playSound} />;
+              return <SongCard info={item}  />;
             })}
           </div>
         </div>

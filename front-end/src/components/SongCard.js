@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import SongContext from "./context";
+import NoteState from "./noteState";
+
+export let player = false;
 
 export function SongCard({info, playSound}) {
+   const {soundPlayed , setsoundPlayed} = useState();
+
+  const { songInfo, setSongInfo} = useContext(SongContext);
+  console.log(songInfo );
+  const ShowPlayer = (info) => {
+    setSongInfo(info)
+    if (songInfo){
+      player = true
+    }
+    console.log(player);
+  }
+  
+
+
   return (
-    <div className="flex h-[4rem] hover:bg-gray-500 hover:bg-opacity-35   p-2 rounded-md  " onClick={()=> { playSound(info.track)}} >
+    <div className="flex h-[4rem] hover:bg-gray-500 hover:bg-opacity-35   p-2 rounded-md  " onClick={()=> { ShowPlayer(info) }} >
       <div
         className="w-12    bg-cover bg  "
         style={{

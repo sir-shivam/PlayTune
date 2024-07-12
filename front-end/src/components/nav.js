@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import {Link, useNavigate} from 'react-router-dom';
+import Streaming from './Streaming';
+import SongContext from './context';
 
 
 const Nav = () => {
+  const { songInfo, setSongInfo} = useContext(SongContext);
+  const {soundPlayed , setsoundPlayed} = useState(null);
+
+
+
     let test1;
     const [cookie,setCookie] = useCookies(["token"]);
     const navigate = useNavigate();
@@ -46,6 +53,8 @@ const Nav = () => {
     
     return (
         <div>
+           <Streaming />
+            
             <div className='w-[20vw] h-[96vh]  rounded-3xl  bg-gradient-to-bl from-[#3c0633] to-[#840f3b]  content-end pb-16 mt-3 '>
             <div className=' h-[30%]  ' >
                 <p className=' w-[60%] h-[80px] rounded-xl  ml-[15%] flex justify-center items-center text-white text-3xl bg-gradient-to-br   ' >D-Tune</p>
