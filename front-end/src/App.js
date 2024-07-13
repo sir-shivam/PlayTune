@@ -24,14 +24,14 @@ function App() {
       <BrowserRouter>
 
       <NoteState>
-      {/* <Streaming /> */}
+      <Streaming />
       
       {
         cookie.token ? (
       
       <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/music"  element={ <View /> }/>
+        <Route path="/home" element={<Home />} /> 
+        <Route path="/playlist"  element={ <View /> }/>
         <Route path="/search" element={<Search /> } />
         <Route path="/logout" element={<Nav />} />
         <Route path="/library" element={<Library />} />

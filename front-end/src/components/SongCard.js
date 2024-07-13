@@ -14,17 +14,17 @@ export function SongCard({info, playSound}) {
 
 
   return (
-    <div className="flex h-[4rem] hover:bg-gray-500 hover:bg-opacity-35   p-2 rounded-md  " onClick={()=> { setSongInfo(info) }} >
+    <div className="flex h-[6rem] hover:bg-gray-500 hover:bg-opacity-35   p-2 rounded-md  " onClick={()=> { setSongInfo(info) }} >
       <div
-        className="w-12    bg-cover bg  "
+        className="w-20    bg-cover bg  "
         style={{
           backgroundImage: `url(${info.thumbnail})`,
         }}
       ></div>
 
       <div className="flex  w-full pr-5">
-        <div className="text-white flex flex-col  justify-center pl-4 w-5/6  ">
-          <div className="cursor-pointer hover:underline  ">
+        <div className="text-white flex flex-col  justify-center pl-8 w-5/6 ">
+          <div className="cursor-pointer hover:underline text-2xl ">
             {info.name}
           </div>
           <div className="text-x text-gray-400 cursor-pointer hover:underline  ">

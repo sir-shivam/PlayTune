@@ -1,16 +1,54 @@
-router.post("/create", async (req,res) => {
-    // const loggedUser = req.user;
-    const {name , thumbnail , songs} = req.body;
-    if(!name || !thumbnail || !songs){
-    return res.status(400).json("insufficient data");
 
-    }
-    const listData = {name , thumbnail , songs , owner: "gupta"};
-    const playlist = await Playlist.create(listData);
-    return res.status(200).json(playlist);
+// router.post("/create", async (req,res) => {
+//     const loggedUser = req.user;
+//     const {name , thumbnail , songs} = req.body;
+//     if(!name || !thumbnail){
+//     return res.status(400).json("hello");
 
-    // res.send(req.user);
-} );
+//     }
+//     const playlist = await Playlist.create({name , thumbnail ,owner: req.user.id, songs:songs });
+//     return res.status(200).json("playlist");
+
+// } );
+
+const express = require('express');
+const mongoose = require('mongoose');
+const authMiddleware = require('./authMiddleware'); 
+
+const Playlist = require('./Playlist'); 
+
+const router = express.Router();
+
+router.post('/create', async (req, res) => {
+  const loggedUser = req.user; 
+  const { name, thumbnail, songs } = req.body;
+
+  if (!name || !thumbnail) {
+    return res.status(400).json({ message: 'Name and thumbnail are required!' });
+  }
+
+  try {
+   
+    const newPlaylist = new Playlist({
+      name,
+      thumbnail,
+      owner: loggedUser._id, 
+      songs, 
+    });
+
+    
+    const savedPlaylist = await newPlaylist.save();
+
+    
+    return res.status(201).json({ message: 'Playlist created successfully!', playlist: savedPlaylist });
+  } catch (error) {
+    console.error('Error creating playlist:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+module.exports = router;
+
 
 router.get("/get/list/:playlistId", async (req,res)=> {
     const playlistId = req.params.playlistId;
