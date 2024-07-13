@@ -9,18 +9,12 @@ export function SongCard({info, playSound}) {
 
   const { songInfo, setSongInfo} = useContext(SongContext);
   console.log(songInfo );
-  const ShowPlayer = (info) => {
-    setSongInfo(info)
-    if (songInfo){
-      player = true
-    }
-    console.log(player);
-  }
+  
   
 
 
   return (
-    <div className="flex h-[4rem] hover:bg-gray-500 hover:bg-opacity-35   p-2 rounded-md  " onClick={()=> { ShowPlayer(info) }} >
+    <div className="flex h-[4rem] hover:bg-gray-500 hover:bg-opacity-35   p-2 rounded-md  " onClick={()=> { setSongInfo(info) }} >
       <div
         className="w-12    bg-cover bg  "
         style={{

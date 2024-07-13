@@ -5,8 +5,6 @@ export default function Home() {
   return (
     <div>
             <div className='full w-screen h-screen bg-[#0f0f0f] flex'>
-                {/* <div className='w-[20vw] h-[96vh]  rounded-3xl  bg-gradient-to-bl from-[#3c0633] to-[#840f3b]  '></div>
-                 */}
                  <Nav />
                 <div className='w-[80vw] h-[100vh]'>
                     <div className='h-[40%] w-[100%]   flex '>

@@ -4,12 +4,16 @@ const Song = require("./Song");
 const router = express.Router();
 
 router.post("/create", async (req,res) =>{
-    const {name , thumbnail , track  } = req.body;
+    const {name , thumbnail , track , artist  } = req.body;
     if(!name || !thumbnail || !track ){
         return res.status(401).json("try again");
     }
-    const artist = req.user.id;
-    const songCreated = await Song.create({name , thumbnail , track , artist: artist}); 
+    let artist1 = artist;
+    if(!artist){
+        artist1 = req.user.id;
+    }
+    
+    const songCreated = await Song.create({name , thumbnail , track , artist: artist1}); 
     return res.status(200).json(songCreated);
     
 } );
@@ -31,8 +35,8 @@ router.get("/get/artist/:artistId", async (req,res) => {
 });
 
 router.get("/get/name/:songName" , async (req, res) => {
-    const {songName} = req.params.songName;
-    let songs = await Song.findOne({name: songName});
+    const songName = req.params.songName;
+    let songs = await Song.find({name: songName}).populate("artist");
     return res.status(200).json(songs);
 } )
 

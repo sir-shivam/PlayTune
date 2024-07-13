@@ -12,6 +12,7 @@ import MySong from './components/MySong';
 import { useContext, useState } from 'react';
 import NoteState from './components/noteState';
 import SongContext from './components/context';
+import Search from './pages/Search';
 
 
 function App() {
@@ -21,7 +22,9 @@ function App() {
     
     <div className="App">
       <BrowserRouter>
+
       <NoteState>
+      {/* <Streaming /> */}
       
       {
         cookie.token ? (
@@ -29,7 +32,7 @@ function App() {
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/music"  element={ <View /> }/>
-        <Route path="/search" element={<Nav/> } />
+        <Route path="/search" element={<Search /> } />
         <Route path="/logout" element={<Nav />} />
         <Route path="/library" element={<Library />} />
         <Route path="/mymusic" element={<MySong/>} />

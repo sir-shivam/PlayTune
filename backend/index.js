@@ -28,6 +28,7 @@ opts.secretOrKey = "secret_key";
 
 passport.use(new JwtStrategy(opts, async (jwt_payload, done) => {
   try {
+    //small change _id:jwt_payload.userId
     console.log(jwt_payload);
     const user = await User.findOne({_id:jwt_payload.userId}); 
     if (user) {
@@ -45,7 +46,6 @@ passport.use(new JwtStrategy(opts, async (jwt_payload, done) => {
 app.get("/view" , async (req,resp) =>{
     
     mongoose.connect("mongodb://localhost:27017/DTune");
-    
     const userSchema = new mongoose.Schema({});
     const data = await User.find();
     console.log(data);
