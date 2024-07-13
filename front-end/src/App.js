@@ -13,6 +13,7 @@ import { useContext, useState } from 'react';
 import NoteState from './components/noteState';
 import SongContext from './components/context';
 import Search from './pages/Search';
+import SinglePlaylist from './pages/SinglePlaylist';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path="/playlist"  element={ <View /> }/>
         <Route path="/search" element={<Search /> } />
         <Route path="/logout" element={<Nav />} />
+        <Route path="/playlist/view/:playlistId" element={<SinglePlaylist />} />
         <Route path="/library" element={<Library />} />
         <Route path="/mymusic" element={<MySong/>} />
         <Route path="*" element={<Navigate to="/home" />} />

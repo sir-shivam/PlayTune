@@ -2,9 +2,13 @@ import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from 
 import Nav from "./nav";
 import { Howl, Howler } from "howler";
 import SongContext from "./context";
+import AddtoPlaylist from "../pages/AddtoPlaylist";
+import { authPost } from "../utils/serverFetch";
 
 
 export default function Streaming() {
+  const [addtolist, setAddtolist] = useState(false);
+
   const { songInfo, setSongInfo } = useContext(SongContext);
   console.log(songInfo);
   const [soundPlayed, setsoundPlayed] = useState(null);
@@ -14,10 +18,7 @@ export default function Streaming() {
   const first = useRef(true);
 
   useLayoutEffect(()=>{
-// if(first.current){
-//   first.current = false;
-//   return;
-// }
+
 
     if(!songInfo){
       return
@@ -52,6 +53,16 @@ export default function Streaming() {
   }
 
 
+  const addTolist1 = async (playlistId)=>{
+    const songId = songInfo._id;
+    const added = {playlistId , songId};
+    const response = await authPost("/playlist/add/song",added);
+    console.log(response);
+    if(response._id){
+      setAddtolist(false);
+    }
+  }
+
   const togglePlay = () => {
     if (isPaused) {
       status = "play";
@@ -68,7 +79,9 @@ export default function Streaming() {
 
   return (
     <div>
-      {/* <Nav /> */}
+      {addtolist && <AddtoPlaylist closeModel={()=> {setAddtolist(false)}} 
+        addTolist1={addTolist1} />}
+      
       <div className="streaming w-[50vw] h-[20vh] bg-gradient-to-br from-[#c81d77] to-[#6710c2] fixed bottom-6 ml-[30vw] rounded-3xl flex ">
         <div className="circle w-[160px] h-[160px] rounded-[50%] bg-gradient-to-tr from-[#a11313]  ml-[-10%] border mt-2 flex justify-center items-center ">
           <img
@@ -77,13 +90,17 @@ export default function Streaming() {
           />
         </div>
         <div className=" w-[70%] ml-[5%] flex flex-col justify-around items-center">
-          <div className=" w-[100%] h-[50%] flex justify-between items-center ">
-            <div className="w-2/5  flex flex-col justify-center items-center">
+          <div className=" w-[100%] h-[50%] flex justify-between items-center border">
+            <div className="w-2/5  flex flex-col justify-center items-center border">
               <div className="text-3xl">{songInfo.name} </div>
               <div className=" opacity-60"> Artist Name</div>
             </div>
-            <div>
-              <i class="fa-regular fa-heart text-4xl "></i>
+            <div >
+              <i class="fa-regular fa-heart text-4xl  mx-2 "></i>
+              
+
+              <i class="fa-regular fa-add text-4xl mx-2 " onClick={()=>{setAddtolist(true)}}  ></i>
+              
             </div>
           </div>
           <input

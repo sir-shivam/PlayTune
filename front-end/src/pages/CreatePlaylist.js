@@ -18,19 +18,15 @@ export default function CreatePlaylist({ closeModel }) {
       const response = await authPost('/playlist/create', {
         name: playlistName,
         thumbnail,
-        songs: [], // Assuming songs will be added later
+        songs: [], 
       });
 
-      if (response.ok) {
-        // Handle successful playlist creation (e.g., close modal, show success message)
+      if (response._id) {
         console.log('Playlist created successfully!');
-      } else {
-        // Handle error (e.g., display error message to user)
-        const errorData = await response.json();
-        console.error('Playlist creation failed:', errorData);
-      }
+        closeModel();
+        alert('Playlist created successfully!')
+      } 
     } catch (error) {
-      // Handle unexpected errors (e.g., network issues)
       console.error('Error creating playlist:', error);
     }
   };

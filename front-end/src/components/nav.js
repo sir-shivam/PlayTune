@@ -8,7 +8,7 @@ import CreatePlaylist from "../pages/CreatePlaylist";
 const Nav = () => {
   const { songInfo, setSongInfo } = useContext(SongContext);
   const { soundPlayed, setsoundPlayed } = useState(null);
-  const [PlaylistModel, setPlaylistModel] = useState(false)
+  const [PlaylistModel, setPlaylistModel] = useState(false);
 
   let test1;
   const [cookie, setCookie] = useCookies(["token"]);

@@ -14,9 +14,11 @@ const playlistSchema  = new mongoose.Schema({
         ref:"users",
     },
     songs :[
-     {
+     {  
+        
         type: mongoose.Types.ObjectId,
-        ref: "songs",
+        ref: "Songs",
+    
     },
     ],
 });
