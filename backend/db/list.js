@@ -16,7 +16,7 @@ router.post("/create", async (req,res) => {
 
 router.get("/get/byme", async (req,res)=> {
     const playlistId = req.user.id;
-    const playlist = await Playlist.find({owner : playlistId}).populate("owner");
+    const playlist = await Playlist.find();
     return res.send(playlist);
 })
 
@@ -40,6 +40,18 @@ router.get("/get/artist/:artistId" , async (req, res )=>{
     return res.status(200).json(playlist);
 })
 
+const listData = [
+    {
+      name: "Special",
+      thumbnail: "https://cdn.pixabay.com/photo/2016/07/07/16/46/dice-1502706_640.jpg", 
+      owner: null,
+      songs: [
+        ("66935b5c906699788af2c196"),
+        ("66935b5c906699788af2c199"),
+      ]
+    },
+  ];
+  
 
 //song adding to a playlist
 router.post("/add/song", async (req, res) => {
@@ -63,6 +75,16 @@ router.post("/add/song", async (req, res) => {
     await playlist.save();
     return res.status(200).json(playlist);
 })
+
+
+router.post("/insert", async (req,res)=>{
+    // res.send("working");
+
+   await Playlist.insertMany(listData);
+   return res.status(200).json("inserted");
+  
+})
+
 
 
 

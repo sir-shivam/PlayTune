@@ -18,6 +18,16 @@ router.post("/create", async (req,res) =>{
     
 } );
 
+router.post("/insert", async (req,res)=>{
+    res.send("working");
+
+  //  await Song.insertMany(songsData);
+  //  return res.status(200).json("inserted");
+  
+})
+
+
+
 router.get("/get/mysongs", async (req,res) =>{
     
     const loggedInUser =  req.user
@@ -41,4 +51,11 @@ router.get("/get/name/:songName" , async (req, res) => {
 } )
 
 
+
+
+
+
 module.exports = router;
+
+
+  

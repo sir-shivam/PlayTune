@@ -16,10 +16,22 @@ const songSchema  = new mongoose.Schema({
         type: String,
         required: true,
     },
+    creator: {
+        type: String,
+        required: true,
+    },
     artist: {
         type: mongoose.Types.ObjectId,
         ref: "users"
-    }
+    },
+    likes: [
+        {  
+           
+           type: mongoose.Types.ObjectId,
+           ref: "users",
+       
+       },
+       ],
 });
 
 module.exports = mongoose.model("Songs", songSchema);

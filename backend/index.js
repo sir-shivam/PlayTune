@@ -45,7 +45,7 @@ passport.use(new JwtStrategy(opts, async (jwt_payload, done) => {
 
 app.get("/view" , async (req,resp) =>{
     
-    mongoose.connect("mongodb://localhost:27017/DTune");
+    mongoose.connect("mongodb+srv://sirshivam25:fttDvaCmM7CsUpaF@dtune.1lfadav.mongodb.net/?retryWrites=true&w=majority&appName=Dtune");
     const userSchema = new mongoose.Schema({});
     const data = await User.find();
     console.log(data);
@@ -59,4 +59,4 @@ app.use("/song", passport.authenticate("jwt", { session: false }),songRoutes);
 app.use("/playlist",passport.authenticate("jwt", { session: false }),listRoutes);
 
 
-app.listen(8080);
+app.listen(4000);

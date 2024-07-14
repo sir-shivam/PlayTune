@@ -28,7 +28,7 @@ export function SongCard({info, playSound}) {
             {info.name}
           </div>
           <div className="text-x text-gray-400 cursor-pointer hover:underline  ">
-            {info.artist.name}
+            {info.artist? info.artist.name : info.creator}
           </div>
         </div>
         <div className="w-1/6 text-gray-400   flex justify-end items-center ">

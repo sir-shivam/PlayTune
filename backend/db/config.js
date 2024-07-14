@@ -1,6 +1,6 @@
 const mongoose = require( 'mongoose'); 
 mongoose
-    .connect("mongodb://localhost:27017/DTune" )
+    .connect("mongodb+srv://sirshivam25:fttDvaCmM7CsUpaF@dtune.1lfadav.mongodb.net/?retryWrites=true&w=majority&appName=Dtune" )
     .then((x)=>{
       console.log("conected to mongo successfully");
     })
@@ -9,5 +9,5 @@ mongoose
 
     });
 
-
-    //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd1cHRhIiwidXNlcklkIjoiNjY5MGY1MGY4ZjRiY2M5MDdhNzM3N2IxIiwiaWF0IjoxNzIwNzc1OTUxfQ.ennuGBrpXWrH7yRM_wujgQG_Otrr_qhiVBvPe5Us9RM
+    //new token
+    // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNoaXZhQGdtYWlsLmNvbSIsInVzZXJJZCI6IjY2OTM0ODY1NzkxOGIyOWYxZTk3NDA0NCIsImlhdCI6MTcyMDkyODM1N30.r5JJKVeEp-q41xRLn5oac978euJ45uEsUQ47Ub4Px2c

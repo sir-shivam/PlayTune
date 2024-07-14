@@ -24,7 +24,7 @@ export default function Library() {
   const PlaylistCard = ({info , playlistId })=>{
     const navigate = useNavigate();
     return(
-    <div  className=' h-28 border  rounded-2xl m-8 flex  flex-col  items-center cursor-pointer ' onClick={()=>{navigate("/playlist/view/"+ playlistId )}}  >
+     <div  className=' h-28 border  rounded-2xl m-8 flex  flex-col  items-center cursor-pointer ' onClick={()=>{navigate("/playlist/view/"+ playlistId )}}  >
      <div  className='box1 border w-[50%] h-[40%] mt-3 rounded-xl '></div>
      <div className='border w-[80%] h-[50%] m-4'></div>
      </div>
@@ -41,7 +41,7 @@ export default function Library() {
         <div className=' h-full  w-full  border  grid gap-8 grid-cols-5 '>
          {
           myList.map((item)=>{
-            return <PlaylistCard key={JSON.stringify(item )} info={item} playlistId={item._id}  /> 
+            return  (<PlaylistCard key={JSON.stringify(item )} info={item} playlistId={item._id}  /> )
           })
          }
         </div>
