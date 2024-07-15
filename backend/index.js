@@ -13,6 +13,7 @@ const bodyParser = require("body-parser");
 require("./db/config");
 const User = require("./db/User");
 const Song = require("./db/Song");
+const port = process.env.PORT || 4000;
 
 
 
@@ -59,4 +60,4 @@ app.use("/song", passport.authenticate("jwt", { session: false }),songRoutes);
 app.use("/playlist",passport.authenticate("jwt", { session: false }),listRoutes);
 
 
-app.listen(4000);
+app.listen(port);
