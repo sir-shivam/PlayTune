@@ -68,12 +68,6 @@ export default function AddtoPlaylist({ closeModel, addTolist1 }) {
     </div>
   );
 
-
- 
-
-
-
-
 }
 
 

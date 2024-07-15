@@ -7,25 +7,16 @@ import SongContext from "./context";
 
 export default function MySong() {
   const [songData, setSongData] = useState([]);
+  const { currentData , setCurrentData   } = useContext(SongContext);
+
   const [soundPlayed , setsoundPlayed] = useState(null);
-  const playSound= (songsrc)=> {
-    if(soundPlayed){
-      soundPlayed.stop();
-    }
-
-    let sound = new Howl({
-      src: [songsrc],
-      html5:true,
-    });
-    setsoundPlayed(sound);
-    sound.play();
-  }
-
+  
 
   useEffect(() => {
     const getData = async () => {
-      const response = await authGet("/song/get/mysongs");
-      setSongData(response);
+      const response = await authGet("/song/get/mylikedsongs");
+      setSongData(response.likedSongs);
+      setCurrentData(response.likedSongs);
       console.log(response);
     };
     getData();

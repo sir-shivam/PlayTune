@@ -8,7 +8,6 @@ import CreatePlaylist from "../pages/CreatePlaylist";
 const Nav = () => {
   const { songInfo, setSongInfo } = useContext(SongContext);
   const { soundPlayed, setsoundPlayed } = useState(null);
-  const [PlaylistModel, setPlaylistModel] = useState(false);
 
   let test1;
   const [cookie, setCookie] = useCookies(["token"]);
@@ -61,9 +60,8 @@ const Nav = () => {
 
   return (
     <div>
-      {PlaylistModel && <CreatePlaylist closeModel={()=>{setPlaylistModel(false)}} />}
         
-      <div className="w-[20vw] h-[96vh]  rounded-3xl  bg-gradient-to-bl from-[#3c0633] to-[#840f3b]  content-end pb-16 mt-3 ">
+      <div className="w-[20vw] h-[96vh]  rounded-3xl  bg-gradient-to-bl from-[#3c0633] to-[#840f3b]  content-end pb-16 mt-4 ">
         <div className=" h-[30%]  ">
           <p className=" w-[60%] h-[80px] rounded-xl  ml-[15%] flex justify-center items-center text-white text-3xl bg-gradient-to-br   ">
             D-Tune
@@ -79,14 +77,12 @@ const Nav = () => {
             </Link>{" "}
           </div>
           <div className=" w-[80%] h-[8%] content-center pl-8   rounded-xl hover:border  cursor-pointer "
-          onClick={()=> {
-            setPlaylistModel(true); 
-          }}
+          
           >
             <Link to="/playlist">
               <li>
-                <i className="fa-solid fa-bookmark mr-[50px]"></i>
-                Creat Playlist 
+                <i className="fa-solid fa-music mr-[50px]"></i>
+                All Songs
               </li>
             </Link>{" "}
           </div>
@@ -97,11 +93,12 @@ const Nav = () => {
             Search
           </li></Link>{" "}
           </div>
+          
 <div className=" w-[80%] h-[8%] content-center pl-8   rounded-xl hover:border  cursor-pointer  ">
 <Link to="/library   ">
           <li >
-            <i className="fa-solid fa-warehouse  mr-[50px]"></i>
-            Library
+            <i className="fa-solid fa-store  mr-[50px]"></i>
+            PlayLists
           </li></Link>
           </div>
           <>
@@ -109,8 +106,8 @@ const Nav = () => {
               <div className=" w-[80%] h-[8%] content-center pl-8   rounded-xl hover:border  cursor-pointer  ">
                     <Link to="/mymusic">
                 <li>
-                <i className="fa-solid fa-warehouse  mr-[50px]"></i>
-                My Music 
+                <i className="fa-solid fa-heart  mr-[50px]"></i>
+                LikedSongs 
                 </li></Link>{" "}
               </div>
             ) : (

@@ -25,7 +25,6 @@ function App() {
       <BrowserRouter>
 
       <NoteState>
-      <Streaming />
       
       {
         cookie.token ? (

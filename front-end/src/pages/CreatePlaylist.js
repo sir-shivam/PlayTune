@@ -48,7 +48,7 @@ export default function CreatePlaylist({ closeModel }) {
             placeholder="Playlist Name"
             className="h-12 pl-4 rounded-lg"
             value={playlistName}
-            onChange={handlePlaylistNameChange} // Use onChange handler
+            onChange={handlePlaylistNameChange} 
           />
 
           <label className="mb-[-15px] h-12 flex pt-9">Thumbnail</label>
@@ -57,12 +57,12 @@ export default function CreatePlaylist({ closeModel }) {
             placeholder="Thumbnail"
             className="h-12 pl-4 rounded-lg"
             value={thumbnail}
-            onChange={handleThumbnailChange} // Use onChange handler
+            onChange={handleThumbnailChange} 
           />
         </div>
         <div
           className="bg-white w-1/3 rounded-lg flex font-bold justify-center h-[40px] items-center ml-[60%]"
-          onClick={createPlaylist} // Call createPlaylist on click
+          onClick={createPlaylist} 
         >
           Create
         </div>

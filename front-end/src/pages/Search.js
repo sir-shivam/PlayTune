@@ -9,6 +9,9 @@ export default function Search() {
   const [searchText, setsearchText] = useState("");
   const [songData , setSongData] = useState([]);
   const { songInfo, setSongInfo} = useContext(SongContext);
+  const {  currentData , setCurrentData } = useContext(SongContext);
+
+
 
   console.log(searchText);
 
@@ -16,6 +19,7 @@ export default function Search() {
     const reponse = await authGet(
       "/song/get/name/" + searchText);
      setSongData(reponse);
+     setCurrentData(reponse);
   console.log();
 
     //  setsearchText(""); 
@@ -27,7 +31,7 @@ export default function Search() {
             <Nav />
             <div className='w-[80vw] h-[100vh] text-white px-8  '>
               <div className='h-28  '>
-                <div className='w-3/5 h-full flex justify-center items-center'>
+                <div className='w-4/5 h-full flex justify-center items-center ml-24'>
                 <div className={`w-[80%] h-[50%]  rounded-full bg-gray-800 flex pl-5 justify-center items-center ${isFocus? "border border-white":""} `}>
                 <i class="fa fa-search text-white w-[10%] h- flex items-center justify-center text-2xl rounded-l-full " aria-hidden="true"></i>
                   <input type='text'  placeholder='Search Song / Artist/ playlist ?'
