@@ -2,26 +2,34 @@ import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import { unauthPost } from "../utils/serverFetch";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const [cookies, setCookie] = useCookies(["token"]);
   const navigate = useNavigate();
 
   const collectData = async () => {
-    const data = { email, password };
-    const response = await unauthPost("/auth/login", data);
-    if (response && !response.err) {
-      console.log(response);
-      const token = response.token;
-      const date = new Date();
-      date.setDate(date.getDate() + 30);
-      setCookie("token", token, { path: "/", expires: date });
-      alert("Success");
-      navigate("/home");
-    } else {
-      alert(response.message);
+    try {
+      setLoading(true);
+      const data = { email, password };
+      const response = await unauthPost("/auth/login", data);
+      if (response && !response.err) {
+        console.log(response);
+        const token = response.token;
+        const date = new Date();
+        date.setDate(date.getDate() + 30);
+        setCookie("token", token, { path: "/", expires: date });
+        toast.success("Login Successfull!!");
+        navigate("/home");
+      } else {
+        alert(response.message);
+      }
+    } catch (error) {
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -80,8 +88,7 @@ const Login = () => {
             onClick={collectData}
             type="button"
           >
-            {" "}
-            LogIn
+            {loading ? "Processing..." : "LogIn"}
           </button>
           <div className="logged text-white flex  ml-[78px] ">
             Don't have an Account?{" "}
