@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { authGet, authPost } from '../utils/serverFetch';
+import React, { useEffect, useState } from "react";
+import { authGet } from "../utils/serverFetch";
 
 export default function AddtoPlaylist({ closeModel, addTolist1 }) {
-
   const [playlistName, setPlaylistName] = useState("");
   const [thumbnail, setThumbnail] = useState("");
 
@@ -18,31 +17,34 @@ export default function AddtoPlaylist({ closeModel, addTolist1 }) {
 
   useEffect(() => {
     const getData = async () => {
-      const data = await authGet("/playlist/get/byme") ;
-      
+      const data = await authGet("/playlist/get/byme");
+
       setmyList(data);
     };
-    getData(); 
-  },[])
+    getData();
+  }, []);
 
-  const ListComponent = ({info ,addTolist1})=>{
-    return(
-       <div className='bg-black flex w-full items-center  hover:bg-gray-500 hover:bg-opacity-35 rounded-lg ' onClick={()=> {
-        addTolist1(info._id);
-       }} >
+  const ListComponent = ({ info, addTolist1 }) => {
+    return (
+      <div
+        className="bg-black flex w-full items-center  hover:bg-gray-500 hover:bg-opacity-35 rounded-lg "
+        onClick={() => {
+          addTolist1(info._id);
+        }}
+      >
         <div>
-            <img src={ info.thumbnail } className='h-10 w-10 rounded' ></img>
+          <img
+            alt="thumbnail"
+            src={info.thumbnail}
+            className="h-10 w-10 rounded"
+          ></img>
         </div>
-        <div className='text-white font-semibold'>
-            <div>{info.name} </div>
+        <div className="text-white font-semibold">
+          <div>{info.name} </div>
         </div>
-       </div>
-    )
-}
-
-
-
-  
+      </div>
+    );
+  };
 
   return (
     <div
@@ -53,25 +55,21 @@ export default function AddtoPlaylist({ closeModel, addTolist1 }) {
         className="w-2/5 bg-[#d8e1e9] rounded-md flex flex-col h-2/4  p-8"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="text-center text-xl font-bold pb-4">Select Playlist</div>
-        <div className="space-y-4 flex flex-col h-[80%] overflow-y-auto  ">
-          
-        {
-            myList.map((item)=>{
-                return <ListComponent key={JSON.stringify(item )} info={item} addTolist1={addTolist1 } />
-            })
-        }
-          
+        <div className="text-center text-xl font-bold pb-4">
+          Select Playlist
         </div>
-         
+        <div className="space-y-4 flex flex-col h-[80%] overflow-y-auto  ">
+          {myList.map((item) => {
+            return (
+              <ListComponent
+                key={JSON.stringify(item)}
+                info={item}
+                addTolist1={addTolist1}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );
-
 }
-
-
-
-
-
-
