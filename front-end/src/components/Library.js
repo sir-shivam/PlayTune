@@ -3,21 +3,33 @@ import Nav from "./nav";
 import { authGet } from "../utils/serverFetch";
 import { useNavigate } from "react-router-dom";
 import CreatePlaylist from "../pages/CreatePlaylist";
+import Loader from "./loader/Loader";
 
 export default function Library() {
   const [PlaylistModel, setPlaylistModel] = useState(false);
+  const [loading, setLoading] = useState(false);
+
 
   const [myList, setmyList] = useState([]);
 
   useEffect(() => {
-    getData("all");
+    getData("all"); 
   }, []);
 
   const getData = async (act) => {
-    const data = await authGet("/playlist/get/" + act);
+    setLoading(true); 
 
-    setmyList(data);
+    try {
+      const response = await authGet("/playlist/get/" + act);
+      setmyList(response);
+    } catch (error) {
+      console.error("Error fetching playlist data:", error);
+      
+    } finally {
+      setLoading(false); 
+    }
   };
+  
 
   // function MyPlaylist() {
   //   return (
@@ -56,6 +68,8 @@ export default function Library() {
 
   return (
     <div>
+
+
       {PlaylistModel && (
         <CreatePlaylist
           closeModel={() => {
@@ -66,6 +80,7 @@ export default function Library() {
 
       <div className="w-screen h-screen bg-[#0f0f0f] flex">
         <Nav />
+
         <div className=" h-[100%] w-[100%]    text-white">
           <div className="flex w-[80%] ml-[10%] justify-around items-center  border-b-2">
             <div
@@ -96,6 +111,8 @@ export default function Library() {
             </div>
           </div>
 
+          { loading ? < Loader /> : 
+          <>
           <div className="w-full h-[88%] p-6 overflow-y-auto ">
             <div className=" w-[95%]   grid grid-cols-4 gap-4 ">
               {myList.map((item) => (
@@ -107,6 +124,9 @@ export default function Library() {
               ))}
             </div>
           </div>
+          </>
+        }
+
         </div>
       </div>
     </div>
