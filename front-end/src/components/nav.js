@@ -13,7 +13,7 @@ const Nav = () => {
   }
   const Autherised = () => {
     return (
-      <div className=" w-[100%] flex flex-col justify-center items-center ">
+      <div className=" w-[100%] flex flex-col justify-center  items-center ">
         <div className=" w-[80%] h-[50px] content-center    rounded-xl hover:border  cursor-pointer pl-[25%] text-sky-500  ">
           <Link to="/signUp">
             <li>Sign Up</li>

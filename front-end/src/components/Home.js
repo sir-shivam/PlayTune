@@ -2,17 +2,30 @@ import React, { useEffect, useState } from "react";
 import Nav from "./nav";
 import { useNavigate } from "react-router-dom";
 import { authGet } from "../utils/serverFetch";
+import Loader from "./loader/Loader";
 
 export default function Home() {
   const [myList1, setmyList1] = useState([]);
+  const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     const getData = async () => {
-      const data = await authGet("/playlist/get/all");
-      setmyList1(data);
+      setLoading(true); 
+  
+      try {
+        const response = await authGet("/playlist/get/all");
+        setmyList1(response);
+      } catch (error) {
+        console.error("Error fetching playlist data:", error); 
+      } finally {
+        setLoading(false); 
+      }
     };
+  
     getData();
   }, []);
+  
 
   const PlaylistCard1 = ({ info, playlistId }) => {
     const navigate = useNavigate();
@@ -74,7 +87,10 @@ export default function Home() {
               </div>
             </div>
           </div>
+
           <div className="h-[72%] w-[95%] p-8  overflow-y-auto ">
+          {loading ? <Loader /> : 
+            <>
             <div className="   grid gap-8 grid-cols-3 ">
               {myList1.map((item) => {
                 return (
@@ -86,6 +102,9 @@ export default function Home() {
                 );
               })}
             </div>
+            </>
+          }
+
           </div>
         </div>
       </div>
