@@ -11,12 +11,10 @@ export default function View() {
   const [allSong, setAllSong] = useState([]);
   const [loading, setLoading] = useState(false);
 
-
-
   useEffect(() => {
     const getData = async () => {
-      setLoading(true); 
-  
+      setLoading(true);
+
       try {
         const response = await authGet("/song/get/all");
         setAllSong(response);
@@ -24,13 +22,12 @@ export default function View() {
       } catch (error) {
         console.error("Error fetching song data:", error);
       } finally {
-        setLoading(false); 
+        setLoading(false);
       }
     };
-  
+
     getData();
   }, []);
-  
 
   return (
     <div>
@@ -41,15 +38,15 @@ export default function View() {
             Available Songs
           </div>
           <div className=" h-[95%] overflow-auto px-16  ">
-
-            { loading ? < Loader /> : 
-            <>
-            {allSong.map((item) => {
-              return <SongCard info={item} />;
-            })}
-            </>
-          }
-
+            {loading ? (
+              <Loader />
+            ) : (
+              <>
+                {allSong.map((item) => {
+                  return <SongCard info={item} />;
+                })}
+              </>
+            )}
           </div>
         </div>
       </div>

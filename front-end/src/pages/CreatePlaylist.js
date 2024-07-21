@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { authPost } from '../utils/serverFetch';
+import React, { useState } from "react";
+import { authPost } from "../utils/serverFetch";
 
 export default function CreatePlaylist({ closeModel }) {
   const [playlistName, setPlaylistName] = useState("");
@@ -15,19 +15,19 @@ export default function CreatePlaylist({ closeModel }) {
 
   const createPlaylist = async () => {
     try {
-      const response = await authPost('/playlist/create', {
+      const response = await authPost("/playlist/create", {
         name: playlistName,
         thumbnail,
-        songs: [], 
+        songs: [],
       });
 
       if (response._id) {
-        console.log('Playlist created successfully!');
+        console.log("Playlist created successfully!");
         closeModel();
-        alert('Playlist created successfully!')
-      } 
+        alert("Playlist created successfully!");
+      }
     } catch (error) {
-      console.error('Error creating playlist:', error);
+      console.error("Error creating playlist:", error);
     }
   };
 
@@ -40,7 +40,9 @@ export default function CreatePlaylist({ closeModel }) {
         className="w-2/5 bg-[#d8e1e9] rounded-md flex flex-col h-2/4  p-8"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="text-center text-xl font-bold pb-4">Create Playlist</div>
+        <div className="text-center text-xl font-bold pb-4">
+          Create Playlist
+        </div>
         <div className="space-y-4 flex flex-col h-[80%]">
           <label className="mb-[-15px]">Playlist Name</label>
           <input
@@ -48,7 +50,7 @@ export default function CreatePlaylist({ closeModel }) {
             placeholder="Playlist Name"
             className="h-12 pl-4 rounded-lg"
             value={playlistName}
-            onChange={handlePlaylistNameChange} 
+            onChange={handlePlaylistNameChange}
           />
 
           <label className="mb-[-15px] h-12 flex pt-9">Thumbnail</label>
@@ -57,12 +59,12 @@ export default function CreatePlaylist({ closeModel }) {
             placeholder="Thumbnail"
             className="h-12 pl-4 rounded-lg"
             value={thumbnail}
-            onChange={handleThumbnailChange} 
+            onChange={handleThumbnailChange}
           />
         </div>
         <div
           className="bg-white w-1/3 rounded-lg flex font-bold justify-center h-[40px] items-center ml-[60%]"
-          onClick={createPlaylist} 
+          onClick={createPlaylist}
         >
           Create
         </div>

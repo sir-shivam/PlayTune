@@ -9,43 +9,24 @@ export default function Library() {
   const [PlaylistModel, setPlaylistModel] = useState(false);
   const [loading, setLoading] = useState(false);
 
-
   const [myList, setmyList] = useState([]);
 
   useEffect(() => {
-    getData("all"); 
+    getData("all");
   }, []);
 
   const getData = async (act) => {
-    setLoading(true); 
+    setLoading(true);
 
     try {
       const response = await authGet("/playlist/get/" + act);
       setmyList(response);
     } catch (error) {
       console.error("Error fetching playlist data:", error);
-      
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
-  
-
-  // function MyPlaylist() {
-  //   return (
-  //     <div>
-  //         <div className=' w-full  h-[88%]  overflow-y-auto '>
-  //         <div className='h-full  w-[95%]     grid gap-8 grid-cols-4  '>
-  //          {
-  //           myList1.map((item)=>{
-  //             return  (<PlaylistCard key={JSON.stringify(item )} info={item} playlistId={item._id}  /> )
-  //           })
-  //          }
-  //         </div>
-  //         </div>
-  //     </div>
-  //   )
-  // }
 
   const PlaylistCard = ({ info, playlistId }) => {
     const navigate = useNavigate();
@@ -68,8 +49,6 @@ export default function Library() {
 
   return (
     <div>
-
-
       {PlaylistModel && (
         <CreatePlaylist
           closeModel={() => {
@@ -111,22 +90,23 @@ export default function Library() {
             </div>
           </div>
 
-          { loading ? < Loader /> : 
-          <>
-          <div className="w-full h-[88%] p-6 overflow-y-auto ">
-            <div className=" w-[95%]   grid grid-cols-4 gap-4 ">
-              {myList.map((item) => (
-                <PlaylistCard
-                  key={JSON.stringify(item)}
-                  info={item}
-                  playlistId={item._id}
-                />
-              ))}
-            </div>
-          </div>
-          </>
-        }
-
+          {loading ? (
+            <Loader />
+          ) : (
+            <>
+              <div className="w-full h-[88%] p-6 overflow-y-auto ">
+                <div className=" w-[95%]   grid grid-cols-4 gap-4 ">
+                  {myList.map((item) => (
+                    <PlaylistCard
+                      key={JSON.stringify(item)}
+                      info={item}
+                      playlistId={item._id}
+                    />
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

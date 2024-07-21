@@ -12,6 +12,6 @@ export const url = (publicId, options) => {
 };
 
 export const OpenUploadWidget = (options, callback) => {
-    console.log(window);
+  console.log(window);
   return window.cloudinary.openUploadWidget(options, callback);
 };

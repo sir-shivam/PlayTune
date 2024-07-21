@@ -17,8 +17,6 @@ export default function Search() {
     setSongData(reponse);
     setCurrentData(reponse);
     console.log();
-
-    //  setsearchText("");
   };
 
   return (

@@ -7,10 +7,7 @@ import LikeIcon from "../pages/LikeSong";
 let played;
 
 export default function Streaming() {
-  let progressBar; //= document.getElementById("progressBar");
-  //  progressBar.value = 0;
-  // progressBar = document.getElementById("progressBar");
-  //         progressBar.value = 0;
+  let progressBar;
   let wavesurfer;
 
   const [addtolist, setAddtolist] = useState(false);

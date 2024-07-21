@@ -39,8 +39,6 @@ export const authGet = async (route) => {
   return formatResponse;
 };
 
-
-
 const getToken = () => {
   const cookieParts = document.cookie.split(";");
   let accessToken;
