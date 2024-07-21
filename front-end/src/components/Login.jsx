@@ -34,11 +34,10 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <div className="full w-screen h-screen bg-[#0f0f0f] flex">
-        <div className="w-[880px] h-[680px] mt-9 flex justify-center items-center relative">
-          <div>
-            <p className="text-[5rem] text-white ">Welcome Back.!</p>
+    
+    <div className=" w-screen h-screen bg-[#0f0f0f] flex">
+        <div className="w-[880px] h-[680px] mt-9 flex justify-center items-center relative"><div>
+            <p className="text-[10rem] md:text-[5rem] text-white ">Welcome Back.!</p>
           </div>
           <div className="w-[302px] h-[302px]   rounded-[50%] bg-gradient-to-b from-[#430356] to-[#0f0f0f] absolute ml-[90%] mt-[-52%]  "></div>
           <div className="w-[220px] h-[220px]   rounded-[50%]  bg-gradient-to-tl from-[#430356] to-[#0f0f0f] absolute ml-[200%]  mt-[69%] "></div>
@@ -92,7 +91,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </div>
+    
   );
 };
 
