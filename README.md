@@ -1,5 +1,14 @@
 # This is 3rd Task for Delta Club (NIT-Trichy)
 
+
+# backend is live at 
+
+   https://d-tune-backend-5lap.onrender.com
+
+# Frontend with Backend is live at 
+
+   https://dtune.vercel.app
+
 # in this project I have used React, NodeJs and MongoDb  
 
 This is my latest code  for Task 3 of the Delta Inductions 2024 (Web development).
@@ -18,28 +27,28 @@ This is my latest code  for Task 3 of the Delta Inductions 2024 (Web development
 
 
 3. for seting up Backend 
-  a. run "cd backend"  in terminal
-  b. "npm install"
-  c. "nodemon"
-  this will start local host 4000 
+  1.  run "cd backend"  in terminal
+  2. "npm install"
+  3. "nodemon"
+  4. this will start local host 4000 
 
 4. For setting up frontend File 
-   a. run "cd ../front-end" to move directly to frontend file using terminal
-   b. "npm install"
-   c. "npm start"   this code will automatically start the frontend at local host 3000
+   1. run "cd ../front-end" to move directly to frontend file using terminal
+   2. "npm install"
+   3. "npm start"   this code will automatically start the frontend at local host 3000
 
 
 # important Note 
-   a. I have deployed backend on render  and its URL is commented in config.js filr which is in path "/front-end/src/utils/config.js"
-   b. it can be used instead of local host 4000
+   1. I have deployed backend on render  and its URL is commented in config.js filr which is in path "/front-end/src/utils/config.js"
+   2. it can be used instead of local host 4000
 
 
 #   The web app is up and running!! , Enjoy the Song
 
 # In Future you can simply run 
 
-   a. "nodemon" in backend file and
-   b. "npm start" in forntend file
+   1. "nodemon" in backend file and
+   2. "npm start" in forntend file
 
 
 
