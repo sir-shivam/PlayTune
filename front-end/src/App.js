@@ -10,10 +10,10 @@ import MySong from "./components/MySong";
 import NoteState from "./components/noteState";
 import Search from "./pages/Search";
 import SinglePlaylist from "./pages/SinglePlaylist";
+import Get from "./pages/Get";
 
 function App() {
   const [cookie, setCookie] = useCookies(["token"]);
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -37,6 +37,7 @@ function App() {
               {/* <Route path="/home" element={<Home />} /> */}
               <Route path="/signUp" element={<SignUp />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/callback" element={<Get />} />
               <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
           )}

@@ -8,8 +8,24 @@ const Login = () => {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loading1, setLoading1] = useState(false);
   const [cookies, setCookie] = useCookies(["token"]);
   const navigate = useNavigate();
+
+const clientId = 'AyNc3hK4wBdsnBtA'; 
+const redirectUri = 'http://localhost:3000/callback'; 
+const scopes = ['openid','email', 'profile', 'user']; 
+
+
+const authorizationUrl = `https://auth.delta.nitt.edu/authorize?` +
+  `client_id=${clientId}&` +
+  `redirect_uri=${encodeURIComponent(redirectUri)}&` +
+  `response_type=code&` +
+  `grant_type=authorization_code&` +
+  `state=sdafsdghb&` +
+  `scope=${scopes.join(' ')}` +
+  `&nonce=bscsbascbadcsbasccabs`;
+
 
   const collectData = async () => {
     try {
@@ -33,11 +49,19 @@ const Login = () => {
     }
   };
 
+  const collectData5 = async () => {
+    setLoading1(true);
+    window.location.href = await authorizationUrl;
+    setTimeout(() => {
+      setLoading1(false);
+    }, 5000);
+  };
+
   return (
     
     <div className=" w-screen h-screen bg-[#0f0f0f] flex">
         <div className="w-[880px] h-[680px] mt-9 flex justify-center items-center relative"><div>
-            <p className="text-[10rem] md:text-[5rem] text-white ">Welcome Back.!</p>
+            <p className="text-[5rem] text-white ">Welcome Back.!</p>
           </div>
           <div className="w-[302px] h-[302px]   rounded-[50%] bg-gradient-to-b from-[#430356] to-[#0f0f0f] absolute ml-[90%] mt-[-52%]  "></div>
           <div className="w-[220px] h-[220px]   rounded-[50%]  bg-gradient-to-tl from-[#430356] to-[#0f0f0f] absolute ml-[200%]  mt-[69%] "></div>
@@ -88,6 +112,15 @@ const Login = () => {
             <p className="ml-2 text-[#628eff] ">
               <Link to="/signUp">Sign Up... </Link>{" "}
             </p>{" "}
+          </div>
+          <div className=" w-[75%] h-[5%] pt-[10%]">
+          <button
+            className=" text-white font-bold w-full h-16  rounded-xl bg-transparent bg-gradient-to-r from-[#628eff] to-[#17a53f] "
+            onClick={collectData5}
+            type="button"
+          >
+            {loading1 ? "Processing..." : "Login With D-Auth"}
+          </button>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Nav from "./nav";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { authGet } from "../utils/serverFetch";
 import Loader from "./loader/Loader";
 
@@ -46,6 +46,7 @@ export default function Home() {
     );
   };
 
+
   return (
     <div>
       <div className="full w-screen h-screen bg-[#0f0f0f] flex">
@@ -80,7 +81,7 @@ export default function Home() {
                 <i class="fa-solid fa-user text-4xl "></i>
               </div>
               <div className=" h-[60px] flex flex-col justify-evenly items-center ml-4 ">
-                <p>Shivam</p>
+                <p className="cursor-pointer " >Shivam</p>
                 <p>India</p>
               </div>
             </div>

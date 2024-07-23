@@ -1,4 +1,9 @@
-export const backendURL = "https://d-tune-backend-5lap.onrender.com";
+export const backendURL = "http://localhost:4000";
+
+
+
+
+//local host Url  "http://localhost:4000"
 
 // backend is live on "https://d-tune-backend-5lap.onrender.com"
 // copy and paste this link in backendURL

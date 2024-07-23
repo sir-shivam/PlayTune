@@ -3,16 +3,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { unauthPost } from "../utils/serverFetch";
 import { useCookies } from "react-cookie";
 
+
 const SignUp = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setemail] = useState("");
   const [cookie, setCookie] = useCookies(["token"]);
   const navigate = useNavigate();
+  const [loading1, setLoading1] = useState(false);
 
   const collectData = async () => {
     const data = { name, email, password };
-    const respose = await unauthPost("/auth/register", data);
+    const respose = await unauthPost("/auth/login", data);
 
     if (respose && !respose.err) {
       console.log(respose);
@@ -27,6 +29,31 @@ const SignUp = () => {
       alert(respose.message);
     }
   };
+
+
+  const clientId = 'AyNc3hK4wBdsnBtA'; 
+const redirectUri = 'http://localhost:3000/callback'; 
+const scopes = ['openid','email', 'profile', 'user']; 
+
+
+const authorizationUrl = `https://auth.delta.nitt.edu/authorize?` +
+  `client_id=${clientId}&` +
+  `redirect_uri=${encodeURIComponent(redirectUri)}&` +
+  `response_type=code&` +
+  `grant_type=authorization_code&` +
+  `state=sdafsdghb&` +
+  `scope=${scopes.join(' ')}` +
+  `&nonce=bscsbascbadcsbasccabs`;
+
+
+  const collectData5 = async () => {
+    setLoading1(true);
+    window.location.href = await authorizationUrl;
+    setTimeout(() => {
+      setLoading1(false);
+    }, 5000);
+  };
+
 
   return (
     <div>
@@ -107,8 +134,19 @@ const SignUp = () => {
               <Link to="/login">Log In... </Link>{" "}
             </p>{" "}
           </div>
+          <div className=" w-[75%] h-[5%] pt-[5%]">
+          <button
+            className=" text-white font-bold w-full h-16  rounded-xl bg-transparent bg-gradient-to-r from-[#628eff] to-[#17a53f] "
+            onClick={collectData5}
+            type="button"
+          >
+            {loading1 ? "Processing..." : "Login With D-Auth"}
+          </button>
+          </div>
+          </div>
+
         </div>
-      </div>
+
     </div>
   );
 };

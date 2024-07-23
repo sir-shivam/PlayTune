@@ -44,9 +44,10 @@ passport.use(new JwtStrategy(opts, async (jwt_payload, done) => {
 
 
 
+
 app.get("/view" , async (req,resp) =>{
     
-    mongoose.connect("mongodb+srv://sirshivam25:fttDvaCmM7CsUpaF@dtune.1lfadav.mongodb.net/?retryWrites=true&w=majority&appName=Dtune");
+    mongoose.connect("mongodb+srv://sirshivam25:IsjDNvpNvTLwk5bg@dtune.1lfadav.mongodb.net/?retryWrites=true&w=majority&appName=Dtune");
     const userSchema = new mongoose.Schema({});
     const data = await User.find();
     console.log(data);
