@@ -1,21 +1,21 @@
 import { OpenUploadWidget } from "../utils/cloudinaryService";
 
-const CloudinaryUpload = () => {
-  const uploadImageWidget = ({ setUrl, setName }) => {
-    console.log("hello");
+const CloudinaryUpload = ({ setUrl, setName }) => {
+  const uploadImageWidget = () => {
     let myUploadWidget = OpenUploadWidget(
       {
-        cloudName: "aggsgha",
-        uploadPreset: "uploadBox",
+        cloudName: "dih9hnlxw",
+        uploadPreset: "upload", 
         sources: ["local"],
       },
       function (error, result) {
         if (!error && result.event === "success") {
+          console.log(result);
           setUrl(result.info.secure_url);
           setName(result.info.original_filename);
         } else {
           if (error) {
-            console.log("error");
+            console.log(error);
           }
         }
       }
@@ -25,10 +25,10 @@ const CloudinaryUpload = () => {
 
   return (
     <button
-      className="greenButton border text-white "
+      className="bg-white text-black  rounded-full p-4 font-semibold"
       onClick={uploadImageWidget}
     >
-      Upload Image
+      Select Track
     </button>
   );
 };

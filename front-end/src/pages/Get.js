@@ -5,6 +5,8 @@ import axios from "axios";
 import Loader from "../components/loader/Loader";
 import SongContext from "../components/context";
 import { useCookies } from "react-cookie";
+import toast from "react-hot-toast";
+
 
 const TokenRequest = () => {
   const [accessToken, setAccessToken] = useState(null);
@@ -93,7 +95,7 @@ const TokenRequest = () => {
       const date = new Date();
       date.setDate(date.getDate() + 1);
       setCookie("token", token, { path: "/", expires: date });
-      alert("success");
+      toast.success("Login Successfull!!");
       navigate("/home");
     } else {
       alert(respose.message);

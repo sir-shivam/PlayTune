@@ -1,0 +1,7 @@
+Allow registration of artist account who can upload their new music to the platform.
+Allow users to create private playlists. Add information on total duration of playlist when displaying it.
+Make liked songs automatically available as a private playlist to the user.
+Users can send friend requests and accept it. Users can be searched in same search bar but with a toggle on for searching people.
+Party Mode - Create a temporary playlist that is a combination of two playlists selected by different users.
+Display lyrics of currently playing song (External APIs are allowed for this objective).
+Integrate authentication with DAuth.

@@ -11,6 +11,7 @@ import NoteState from "./components/noteState";
 import Search from "./pages/Search";
 import SinglePlaylist from "./pages/SinglePlaylist";
 import Get from "./pages/Get";
+import SongUpload from "./components/Songupload";
 
 function App() {
   const [cookie, setCookie] = useCookies(["token"]);
@@ -21,6 +22,7 @@ function App() {
           {cookie.token ? (
             <Routes>
               <Route path="/home" element={<Home />} />
+
               <Route path="/playlist" element={<View />} />
               <Route path="/search" element={<Search />} />
               <Route path="/logout" element={<Nav />} />
@@ -29,6 +31,7 @@ function App() {
                 element={<SinglePlaylist />}
               />
               <Route path="/library" element={<Library />} />
+              <Route path="/upload" element={<SongUpload />} />
               <Route path="/mymusic" element={<MySong />} />
               <Route path="*" element={<Navigate to="/home" />} />
             </Routes>

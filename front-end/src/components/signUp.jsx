@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { unauthPost } from "../utils/serverFetch";
 import { useCookies } from "react-cookie";
-
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -13,8 +13,14 @@ const SignUp = () => {
   const [loading1, setLoading1] = useState(false);
 
   const collectData = async () => {
-    const data = { name, email, password };
-    const respose = await unauthPost("/auth/login", data);
+    const checkbox = document.getElementById('singer');
+    let singer = false;
+    console.log(checkbox.checked);
+    if(checkbox.checked){
+      singer = true;
+    }
+    const data = { name, email, password ,singer};
+    const respose = await unauthPost("/auth/register", data);
 
     if (respose && !respose.err) {
       console.log(respose);
@@ -23,28 +29,26 @@ const SignUp = () => {
       const date = new Date();
       date.setDate(date.getDate() + 1);
       setCookie("token", token, { path: "/", expires: date });
-      alert("success");
+      toast.success("SignUp Successfull!!");
       navigate("/home");
     } else {
       alert(respose.message);
     }
   };
 
+  const clientId = "AyNc3hK4wBdsnBtA";
+  const redirectUri = "http://localhost:3000/callback";
+  const scopes = ["openid", "email", "profile", "user"];
 
-  const clientId = 'AyNc3hK4wBdsnBtA'; 
-const redirectUri = 'http://localhost:3000/callback'; 
-const scopes = ['openid','email', 'profile', 'user']; 
-
-
-const authorizationUrl = `https://auth.delta.nitt.edu/authorize?` +
-  `client_id=${clientId}&` +
-  `redirect_uri=${encodeURIComponent(redirectUri)}&` +
-  `response_type=code&` +
-  `grant_type=authorization_code&` +
-  `state=sdafsdghb&` +
-  `scope=${scopes.join(' ')}` +
-  `&nonce=bscsbascbadcsbasccabs`;
-
+  const authorizationUrl =
+    `https://auth.delta.nitt.edu/authorize?` +
+    `client_id=${clientId}&` +
+    `redirect_uri=${encodeURIComponent(redirectUri)}&` +
+    `response_type=code&` +
+    `grant_type=authorization_code&` +
+    `state=sdafsdghb&` +
+    `scope=${scopes.join(" ")}` +
+    `&nonce=bscsbascbadcsbasccabs`;
 
   const collectData5 = async () => {
     setLoading1(true);
@@ -53,7 +57,6 @@ const authorizationUrl = `https://auth.delta.nitt.edu/authorize?` +
       setLoading1(false);
     }, 5000);
   };
-
 
   return (
     <div>
@@ -105,15 +108,15 @@ const authorizationUrl = `https://auth.delta.nitt.edu/authorize?` +
             id="password"
           />
 
-          <div className="flex mb-2 ml-[-48%]">
+          <div className="flex mb-2 ">
             <input
-              className="inline-block"
+              className="inline-block mr-2"
               type="checkbox"
-              id="remember-me"
-              name="remember-me"
+              id="singer"
+              name="singer"
             />
-            <label for="remember-me" className="text-white inline-block">
-              Remember me
+            <label for="singer" className="text-white inline-block">
+              I'm a Singer ...register me as an  Artist Account
             </label>
           </div>
 
@@ -135,18 +138,16 @@ const authorizationUrl = `https://auth.delta.nitt.edu/authorize?` +
             </p>{" "}
           </div>
           <div className=" w-[75%] h-[5%] pt-[5%]">
-          <button
-            className=" text-white font-bold w-full h-16  rounded-xl bg-transparent bg-gradient-to-r from-[#628eff] to-[#17a53f] "
-            onClick={collectData5}
-            type="button"
-          >
-            {loading1 ? "Processing..." : "Login With D-Auth"}
-          </button>
+            <button
+              className=" text-white font-bold w-full h-16  rounded-xl bg-transparent bg-gradient-to-r from-[#628eff] to-[#17a53f] "
+              onClick={collectData5}
+              type="button"
+            >
+              {loading1 ? "Processing..." : "Login With D-Auth"}
+            </button>
           </div>
-          </div>
-
         </div>
-
+      </div>
     </div>
   );
 };

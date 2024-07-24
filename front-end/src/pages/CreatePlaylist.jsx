@@ -33,11 +33,11 @@ export default function CreatePlaylist({ closeModel }) {
 
   return (
     <div
-      className="absolute w-screen h-screen bg-[#0f0f0f] z-[4] bg-opacity-40 flex justify-center items-center"
+      className="absolute w-screen h-screen bg-[#0f0f0f] z-[8] bg-opacity-40 flex justify-center items-center"
       onClick={closeModel}
     >
       <div
-        className="w-2/5 bg-[#d8e1e9] rounded-md flex flex-col h-2/4  p-8"
+        className="w-[30%] bg-[#d8e1e9] rounded-md flex flex-col h-2/4  p-8"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="text-center text-xl font-bold pb-4">

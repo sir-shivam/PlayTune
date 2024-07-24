@@ -76,14 +76,15 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="text-white flex ml-[10%] mt-[5%]  ">
+            <div className="text-white flex ml-[10%] mt-[5%] border  ">
               <div className="w-[60px] h-[60px] border rounded-[50%] flex justify-center items-center  ">
                 <i class="fa-solid fa-user text-4xl "></i>
               </div>
-              <div className=" h-[60px] flex flex-col justify-evenly items-center ml-4 ">
+              <div className=" h-[60px] border flex flex-col justify-evenly items-center ml-4 ">
                 <p className="cursor-pointer " >Shivam</p>
                 <p>India</p>
               </div>
+              <div className="text-white cursor-pointer" >Upload song</div>
             </div>
           </div>
 

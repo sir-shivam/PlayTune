@@ -149,7 +149,7 @@ export default function Streaming() {
           <div className=" w-[100%] h-[50%] flex justify-between items-center ">
             <div className="w-4/5  flex flex-col ml-3  ">
               <div className="text-3xl">{songInfo.name} </div>
-              <div className=" opacity-60">{songInfo.creator}</div>
+              <div className=" opacity-60">{songInfo.artist ? songInfo.artist.name : songInfo.creator }</div>
             </div>
             <div className="flex  justify-end">
               <div>

@@ -4,12 +4,15 @@ import CloudinaryUpload from "./upload";
 import { authPost } from "../utils/serverFetch";
 import { useNavigate } from "react-router-dom";
 
-export default function Mymusic() {
+export default function SongUpload() {
   const [name, setName] = useState("");
   const [thumbnail, setThumbnail] = useState("");
   const [playUrl, setPlayUrl] = useState("");
   const [songName, setSongname] = useState();
   const navigate = useNavigate();
+
+
+
   const submitSong = async () => {
     const data = { name, thumbnail, track: playUrl };
     const response = await authPost("/song/create", data);
@@ -25,29 +28,30 @@ export default function Mymusic() {
       <Nav />
       <div>
         <input
-          className="box1 border w-[20%] h-[10%]  "
+          className="box1 border w-[330px] h-[50px] text-black bg-gray-600 "
+          placeholder="song"
+          type="text"
           value={name}
-          setValue={setName}
+          onChange={(e) => setName(e.target.value)}
         />
         <input
-          className="box1 border w-[20%] h-[10%]  "
+          className="box1 border w-[330px] h-[50px]  text-black border-red-400 border "
+          placeholder="song"
+          type="text"
           value={thumbnail}
-          setValue={setThumbnail}
+          onChange={(e) => setThumbnail(e.target.value)}
         />
-        <div className="w-[10vw] h-[10vw] border rounded-full  text-white  justify-center items-center ">
-          Select track
-        </div>
 
         <div>
           {songName ? (
-            <div className="bg-white rounded-lg ">
+            <div className="bg-white w-5/6 rounded-lg ">
               {songName.substring(0, 20)}...
             </div>
           ) : (
             <CloudinaryUpload setUrl={setPlayUrl} setName={setSongname} />
           )}
         </div>
-        <div className="bg-white w-5 h-4 cursor-pointer  " onClick={submitSong}>
+        <div className="bg-white w-20 h-20 cursor-pointer  " onClick={submitSong}>
           Submit song
         </div>
       </div>

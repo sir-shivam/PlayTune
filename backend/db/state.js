@@ -12,7 +12,7 @@ const generateToken = (email, userId) => {
 
 router.post('/register', async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password , singer } = req.body;
     
         // Input validation (optional)
         if (!name || !email || !password) {
@@ -25,7 +25,7 @@ router.post('/register', async (req, res) => {
         }
 
           const hashedPassword = await bcrypt.hash(password, 10);
-          const newUserData = await User.create({name, email, password: hashedPassword})
+          const newUserData = await User.create({name, email, singer ,password: hashedPassword  })
           const token = generateToken(email,  newUserData._id); 
           const userToReturn = { ...newUserData.toJSON(), token };
           delete userToReturn.password;

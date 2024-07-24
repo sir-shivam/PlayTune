@@ -5,16 +5,15 @@ const User = require("./User");
 const router = express.Router();
 
 router.post("/create", async (req,res) =>{
-    const {name , thumbnail , track , artist  } = req.body;
+    const {name , thumbnail , track  } = req.body;
     if(!name || !thumbnail || !track ){
-        return res.status(401).json("try again");
+      return res.status(401).json("try again");
     }
-    let artist1 = artist;
-    if(!artist){
-        artist1 = req.user.id;
-    }
+
+    const loggedUserId = req.user.id;
+    let play = "noone";
     
-    const songCreated = await Song.create({name , thumbnail , track , artist: artist1}); 
+    const songCreated = await Song.create({name , thumbnail , track , creator: play , artist : loggedUserId}); 
     return res.status(200).json(songCreated);
     
 } );
