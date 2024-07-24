@@ -75,6 +75,10 @@ This is my latest code  for Task 3 of the Delta Inductions 2024 (Web development
    13.  Search song by Name --------(done)
    14.  progress bar of song --------(done)
 
+   15.  Dauth ---------------(done);
+   16. Playlistduration -------------(done);
+   17. Liked songs Playlist ---------(done);
+
 
 
    ##  Completed Normal Mode #

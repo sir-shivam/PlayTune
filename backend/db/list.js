@@ -40,6 +40,8 @@ router.get("/get/list/:playlistId", async (req,res)=> {
     return res.send(playlist);
 })
 
+
+
 router.get("/get/artist/:artistId" , async (req, res )=>{
     const artId = req.params.artistId;
     const playlist = await Playlist.find({owner: artId});
@@ -47,6 +49,12 @@ router.get("/get/artist/:artistId" , async (req, res )=>{
 })
 
 
+router.post("/updatetime", async (req, res) => {
+    const {totaltime , playlistId , allsongs} = req.body;
+
+    await Playlist.findByIdAndUpdate(playlistId , { totaltime: totaltime , songs : allsongs });
+    return res.status(200).json("success");
+})
 
 //song adding to a playlist
 router.post("/add/song", async (req, res) => {
@@ -65,6 +73,40 @@ router.post("/add/song", async (req, res) => {
 })
 
 
+router.post('/get/update', async (req, res) => {
+    try {
+      const songsToUpdate = await Playlist.find({ time: { $exists: false } }).populate("songs");
+      const updatePromises = songsToUpdate.map(async (list) => {
+        let time = 0;
+
+        const updatesong = list.songs.map( async (song) => {
+        console.log(song);
+            
+             time += song.time;
+        })
+  
+        await Playlist.findByIdAndUpdate(list._id, { totaltime: time });
+      });
+  
+      await Promise.all(updatePromises);
+  
+      res.status(200).json({ message: 'Songs updated successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error updating songs' });
+    }
+  });
+
+
+  router.get("/view" , async (req,resp) =>{
+    
+    const data = await Playlist.find();
+    resp.send(data);
+    
+  })
+  
+
+
 router.post("/insert", async (req,res)=>{
     // res.send("working");
 
@@ -75,27 +117,11 @@ router.post("/insert", async (req,res)=>{
 
 const listData = [
     {
-      name: "Midnight Musings",
-      thumbnail: "https://images.unsplash.com/photo-1718554517780-b9ca6513c4c3?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw2Nnx8fGVufDB8fHx8fA%3D%3D", 
+      name: "Liked Songs",
+      thumbnail: "https://plus.unsplash.com/premium_photo-1673456557398-27d089e901de?q=80&w=2160&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
       owner: null,
-      songs: [
-        ("66952308556869af295d48ce"),
-        ("66952308556869af295d48cf"),
-        ("66952308556869af295d48d2"),
-        ("66952308556869af295d48d5"),
-        ("66952308556869af295d48d8"),
-        ("66952308556869af295d48de"),
-        ("66952308556869af295d48e0"),
-        ("6694f2733de99812f61a415d"),
-        ("6694f2733de99812f61a4160"),
-        ("6694f2733de99812f61a4161"),
-        ("6694f2733de99812f61a4164"),
-        ("66951762f4af8794d934a40e"),
-        ("66951762f4af8794d934a412"),
-        ("66951762f4af8794d934a414"),
-        ("66951762f4af8794d934a416"),
-
-      ]
+      totaltime: 0,
+      songs: []
     },
   ];
   

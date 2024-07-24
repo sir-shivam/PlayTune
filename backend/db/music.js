@@ -3,6 +3,8 @@ const express = require("express");
 const Song = require("./Song");
 const User = require("./User");
 const router = express.Router();
+const { spawn } = require('child_process');
+
 
 router.post("/create", async (req,res) =>{
     const {name , thumbnail , track  } = req.body;
@@ -25,6 +27,55 @@ router.post("/insert", async (req,res)=>{
    return res.status(200).json("inserted");
   
 })
+
+router.post('/get/update', async (req, res) => {
+  try {
+    const songsToUpdate = await Song.find({ time: { $exists: false } });
+
+    const updatePromises = songsToUpdate.map(async (song) => {
+      const time = await getAudioDuration(song.track); 
+
+      await Song.findByIdAndUpdate(song._id, { time: time });
+    });
+
+    await Promise.all(updatePromises);
+
+    res.status(200).json({ message: 'Songs updated successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error updating songs' });
+  }
+});
+
+
+const getAudioDuration = async (track) => {
+  return new Promise((resolve, reject) => {
+    const ffprobe = spawn('ffprobe', ['-v', 'quiet', '-show_format', '-print_format', 'json', track]);
+
+    let output = '';
+    ffprobe.stdout.on('data', (data) => {
+      output += data.toString();
+    });
+
+    ffprobe.stderr.on('data', (data) => {
+      reject(new Error(`Error getting duration: ${data}`));
+    });
+
+    ffprobe.on('close', (code) => {
+      if (code === 0) {
+        try {
+          const data = JSON.parse(output);
+          const duration = parseFloat(data.format.duration);
+          resolve((duration / 60).toFixed(2)); 
+        } catch (error) {
+          reject(new Error('Error parsing ffprobe output'));
+        }
+      } else {
+        reject(new Error(`ffprobe exited with code: ${code}`));
+      }
+    });
+  });
+};
 
 
 
@@ -49,7 +100,6 @@ router.get("/get/name/:songName" , async (req, res) => {
 } );
 
 router.get("/get/all" , async (req, res) => {
-    // const songName = req.params.songName;
     let songs = await Song.find().populate("artist");
     return res.status(200).json(songs);
 } )
@@ -124,6 +174,13 @@ router.post("/unlike", async (req, res) => {
     return res.status(500).json("Internal Server Error");
   }
 });
+
+router.get("/view" , async (req,resp) =>{
+    
+  const data = await Song.find();
+  resp.send(data);
+  
+})
 
 
 

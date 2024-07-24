@@ -35,7 +35,7 @@ export default function SongUpload() {
           onChange={(e) => setName(e.target.value)}
         />
         <input
-          className="box1 border w-[330px] h-[50px]  text-black border-red-400 border "
+          className="box1  w-[330px] h-[50px]  text-black border-red-400 border "
           placeholder="song"
           type="text"
           value={thumbnail}

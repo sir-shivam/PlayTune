@@ -13,6 +13,10 @@ const playlistSchema  = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref:"users",
     },
+    totaltime: {
+        type: Number,
+        required: true, 
+    },
     songs :[
      {  
         

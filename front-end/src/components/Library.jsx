@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Nav from "./nav";
-import { authGet } from "../utils/serverFetch";
+import { authGet, authPost } from "../utils/serverFetch";
 import { useNavigate } from "react-router-dom";
 import CreatePlaylist from "../pages/CreatePlaylist";
 import Loader from "./loader/Loader";
@@ -21,6 +21,9 @@ export default function Library() {
     try {
       const response = await authGet("/playlist/get/" + act);
       setmyList(response);
+      response.map((item)=>{
+        item.name ==="Liked Songs" ? letupdate(item) : console.log("hello");
+      })
     } catch (error) {
       console.error("Error fetching playlist data:", error);
     } finally {
@@ -28,11 +31,32 @@ export default function Library() {
     }
   };
 
+
+const letupdate = async(item)=>{
+
+    const updation = async () => {
+      const res = await authGet("/song/get/mylikedsongs");
+      item.songs = (res.likedSongs);
+      let playlistId = item._id;
+      let allsongs = res.likedSongs;
+      console.log(allsongs )
+      let totaltime = 0;
+      (item.songs).forEach(element => {
+        totaltime += (element.time);
+      });
+      const res1 = await authPost("/playlist/updatetime", {totaltime , playlistId, allsongs  } );
+      console.log(item._id);
+    } 
+    updation();
+}
+
+  
+
   const PlaylistCard = ({ info, playlistId }) => {
     const navigate = useNavigate();
     return (
       <div
-        className=" w-full   border-opacity-100 rounded-2xl m-8 flex  flex-col  items-center cursor-pointer  "
+        className=" w-full   border-opacity-80 bg-gray-400 bg-opacity-10 hover:bg-opacity-30 rounded-2xl m-8 flex  flex-col  items-center cursor-pointer pt-4 "
         onClick={() => {
           navigate("/playlist/view/" + playlistId);
         }}
@@ -42,7 +66,8 @@ export default function Library() {
           src={info.thumbnail}
           className="box1  w-[80%] h-[70%] mt-3 rounded-xl "
         ></img>
-        <div className=" w-[80%] text-2xl m-4">{info.name} </div>
+        <div className=" w-[80%]  text-2xl m-4">{info.name} </div>
+        <div className="text-white ml-[-10px]">Total Duration : {(info.totaltime).toFixed(2)} min</div>
       </div>
     );
   };

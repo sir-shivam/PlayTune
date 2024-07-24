@@ -8,6 +8,10 @@ const songSchema  = new mongoose.Schema({
         type: String,
         required: true,
     },
+    time: {
+        type: Number,
+        required: true,
+    },
     thumbnail: {
         type: String,
         required: true,

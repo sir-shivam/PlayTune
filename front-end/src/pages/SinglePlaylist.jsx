@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Nav from "../components/nav";
 import { useParams } from "react-router-dom";
-import { authGet } from "../utils/serverFetch";
+import { authGet, authPost } from "../utils/serverFetch";
 import { SongCard } from "../components/SongCard";
 import SongContext from "../components/context";
 import Loader from "../components/loader/Loader";
@@ -19,8 +19,17 @@ export default function SinglePlaylist() {
 
       try {
         const response = await authGet("/playlist/get/list/" + playlistId);
+        console.log(response);
+
+      
         setlistDetail(response);
         setCurrentData(response.songs);
+      
+
+        // console.log(response);
+
+        // setlistDetail(response);
+        // setCurrentData(response.songs);
       } catch (error) {
         console.error("Error fetching playlist data:", error);
       } finally {
@@ -30,6 +39,8 @@ export default function SinglePlaylist() {
 
     getData();
   }, [playlistId]);
+
+  
 
   return (
     <div>
