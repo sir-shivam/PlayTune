@@ -12,6 +12,8 @@ import Search from "./pages/Search";
 import SinglePlaylist from "./pages/SinglePlaylist";
 import Get from "./pages/Get";
 import SongUpload from "./components/Songupload";
+import FriendReq from "./pages/FriendReq";
+import CheckRequest from "./pages/CheckRequest";
 
 function App() {
   const [cookie, setCookie] = useCookies(["token"]);
@@ -33,6 +35,8 @@ function App() {
               <Route path="/library" element={<Library />} />
               <Route path="/upload" element={<SongUpload />} />
               <Route path="/mymusic" element={<MySong />} />
+              <Route path="/allfriend" element={< FriendReq />} />
+              <Route path="/friendrequest" element={< CheckRequest />} />
               <Route path="*" element={<Navigate to="/home" />} />
             </Routes>
           ) : (

@@ -104,6 +104,20 @@ const Nav = () => {
               <></>
             )}{" "}
           </>
+          <>
+            {test1 ? (
+              <div className=" w-[80%] h-[8%] content-center pl-8   rounded-xl hover:border  cursor-pointer  ">
+                <Link to="/allfriend">
+                  <li>
+                    <i className="fa-solid fa-heart  mr-[50px]"></i>
+                    Friends
+                  </li>
+                </Link>{" "}
+              </div>
+            ) : (
+              <></>
+            )}{" "}
+          </>
 
           <li className="w-[100%] h-auto ">
             {test1 ? <UnAutherised /> : <Autherised />}{" "}
