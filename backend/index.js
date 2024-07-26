@@ -6,6 +6,7 @@ const passport = require("passport");
 const authRoutes = require("./db/state");
 const songRoutes = require("./db/music");
 const listRoutes = require("./db/list");
+const requestRourtes = require("./db/Allrequest")
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
@@ -59,6 +60,7 @@ app.get("/view" , async (req,resp) =>{
 app.use("/auth", authRoutes);
 app.use("/song", passport.authenticate("jwt", { session: false }),songRoutes);
 app.use("/playlist",passport.authenticate("jwt", { session: false }),listRoutes);
+app.use("/request",passport.authenticate("jwt", { session: false }),requestRourtes);
 
 
 app.listen(port);

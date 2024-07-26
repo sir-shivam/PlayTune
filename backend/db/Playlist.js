@@ -13,6 +13,11 @@ const playlistSchema  = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref:"users",
     },
+    visibilty: {
+        type: String,
+        enum: ["private", "public"],
+        default: "private",
+      },
     totaltime: {
         type: Number,
         required: true, 

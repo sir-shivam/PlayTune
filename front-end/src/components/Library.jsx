@@ -83,9 +83,14 @@ const letupdate = async(item)=>{
       )}
 
       <div className="w-screen h-screen bg-[#0f0f0f] flex">
-        <Nav />
+      <div className=" hidden md:block">
+      <Nav />
+      </div>
 
-        <div className=" h-[100%] w-[100%]    text-white">
+        <div className=" h-[100%] w-[100%]  border   text-white">
+        <div className=" md:hidden">
+      <Nav />
+      </div>
           <div className="flex w-[80%] ml-[10%] justify-around items-center  border-b-2">
             <div
               className="font-bold  hover:cursor-pointer text-center "
@@ -120,7 +125,7 @@ const letupdate = async(item)=>{
           ) : (
             <>
               <div className="w-full h-[88%] p-6 overflow-y-auto ">
-                <div className=" w-[95%]   grid grid-cols-4 gap-4 ">
+                <div className=" w-[95%]   grid grid-cols-2 md:grid-cols-4 gap-4 ">
                   {myList.map((item) => (
                     <PlaylistCard
                       key={JSON.stringify(item)}
@@ -137,3 +142,5 @@ const letupdate = async(item)=>{
     </div>
   );
 }
+
+

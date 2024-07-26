@@ -1,204 +1,159 @@
-import React, { useContext, useLayoutEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import SongContext from "./context";
 import AddtoPlaylist from "../pages/AddtoPlaylist";
 import { authPost } from "../utils/serverFetch";
 import LikeIcon from "../pages/LikeSong";
 
-let played;
-
 export default function Streaming() {
-  let progressBar;
-  let wavesurfer;
-
   const [addtolist, setAddtolist] = useState(false);
-
   const { songInfo, setSongInfo } = useContext(SongContext);
-  const { currentData, setCurrentData } = useContext(SongContext);
-  const { Songclicked, setSongclicked } = useContext(SongContext);
-
-  console.log(songInfo);
-  const [soundPlayed, setsoundPlayed] = useState(null);
+  const { currentData } = useContext(SongContext);
+  const [soundPlayed, setSoundPlayed] = useState(null);
   const [isPaused, setPause] = useState(true);
-  const [duration, setduration] = useState(0);
+  const [duration, setDuration] = useState(0);
   const [time, setTime] = useState(0);
-  let status = "play";
 
-  const first = useRef(true);
+  const progressBarRef = useRef(null);
 
-  useLayoutEffect(() => {
-    if (!songInfo) {
-      return;
-    }
+  useEffect(() => {
+    if (!songInfo) return;
     changeSound(songInfo.track);
-  }, [songInfo || songInfo.track]);
+  }, [songInfo]);
 
   const changeSound = (songsrc) => {
     if (soundPlayed) {
       soundPlayed.pause();
     }
 
-    let sound = new Audio(songsrc, {
-      preload: "metadata",
+    const sound = new Audio(songsrc);
+    sound.onended = playNext;
+
+    sound.addEventListener("canplay", () => {
+      setDuration((sound.duration / 60).toFixed(2));
     });
-
-    sound.onended = function () {
-      playNext();
-    };
-
-    sound.addEventListener("canplay", function () {
-      console.log("Audio is ready to play (readyState: 4).");
-      setduration((sound.duration / 60).toFixed(2));
-    });
-
-    setsoundPlayed(sound);
-    sound.play();
 
     sound.addEventListener("timeupdate", () => {
-      let progressBar = document.querySelector("#progressBar");
-      let progress = parseInt((sound.currentTime / sound.duration) * 100);
-      progressBar.value = progress;
+      if (progressBarRef.current) {
+        const progress = (sound.currentTime / sound.duration) * 100;
+        progressBarRef.current.value = progress;
+      }
       setTime((sound.currentTime / 60).toFixed(2));
     });
+
+    setSoundPlayed(sound);
+    sound.play();
     setPause(false);
   };
 
-  const pauseSound = () => {
-    soundPlayed.pause();
-  };
+  const togglePlay = () => {
+    if (!soundPlayed) return;
 
-  const playSound = () => {
-    if (!soundPlayed) {
-      return;
+    if (isPaused) {
+      soundPlayed.play();
+    } else {
+      soundPlayed.pause();
     }
-    soundPlayed.play();
+    setPause(!isPaused);
   };
 
   const playNext = () => {
-    for (let i = 0; i < currentData.length; i++) {
-      if (currentData[i] === songInfo && i + 1 < currentData.length) {
-        setSongInfo(currentData[i + 1]);
-        return;
-      }
+    const currentIndex = currentData.findIndex(
+      (item) => item._id === songInfo._id
+    );
+    if (currentIndex !== -1 && currentIndex + 1 < currentData.length) {
+      setSongInfo(currentData[currentIndex + 1]);
     }
   };
 
   const playPrevious = () => {
-    for (let i = 0; i < currentData.length; i++) {
-      if (currentData[i] === songInfo && i - 1 >= 0) {
-        setSongInfo(currentData[i - 1]);
-        return;
-      }
+    const currentIndex = currentData.findIndex(
+      (item) => item._id === songInfo._id
+    );
+    if (currentIndex !== -1 && currentIndex > 0) {
+      setSongInfo(currentData[currentIndex - 1]);
     }
   };
 
-  const progressChange = () => {
-    let progressBar = document.querySelector("#progressBar");
-    soundPlayed.currentTime = (progressBar.value * soundPlayed.duration) / 100;
+  const progressChange = (e) => {
+    if (soundPlayed) {
+      const newTime = (e.target.value * soundPlayed.duration) / 100;
+      soundPlayed.currentTime = newTime;
+    }
   };
 
   const addTolist1 = async (playlistId) => {
-    console.log("hello");
-    const songId = songInfo._id;
-
     const response = await authPost("/playlist/add/song", {
       playlistId,
-      songId,
+      songId: songInfo._id,
     });
-    console.log(response);
     if (response._id) {
       setAddtolist(false);
     }
   };
 
-  const togglePlay = () => {
-    if (isPaused) {
-      status = "play";
-      playSound();
-      setPause(false);
-      console.log(status);
-    } else {
-      pauseSound();
-      setPause(true);
-      status = "pause";
-      console.log(status);
-    }
-  };
-
-  console.log(played);
-
   return (
     <div>
       {addtolist && (
         <AddtoPlaylist
-          closeModel={() => {
-            setAddtolist(false);
-          }}
+          closeModel={() => setAddtolist(false)}
           addTolist1={addTolist1}
         />
       )}
 
-      <div className="streaming w-[48vw] h-[18vh] bg-gradient-to-br from-[#c81d77] to-[#6710c2] fixed bottom-6 ml-[35vw] rounded-3xl flex ">
-        <div className="circle w-[140px] h-[140px] rounded-[50%] bg-gradient-to-tr from-[#a11313]  ml-[-10%] border mt-2 flex justify-center items-center ">
+      <div className="streaming w-[80vw] ml-[10%]  md:w-[48vw] h-[18vh] bg-gradient-to-br from-[#c81d77] to-[#6710c2] fixed bottom-6 md:ml-[35vw] rounded-3xl flex items-center p-4 shadow-lg">
+        <div className="circle w-[140px] h-[140px] rounded-full bg-gradient-to-tr from-[#a11313] flex-shrink-0 border-4 border-white overflow-hidden">
           <img
             alt="thumbnail"
-            className="border w-[80%] h-[80%] rounded-[50%]"
+            className="w-full h-full object-cover"
             src={songInfo.thumbnail}
           />
         </div>
-        <div className=" w-[80%] ml-2 flex flex-col justify-around items-center">
-          <div className=" w-[100%] h-[50%] flex justify-between items-center ">
-            <div className="w-4/5  flex flex-col ml-3  ">
-              <div className="text-3xl">{songInfo.name} </div>
-              <div className=" opacity-60">{songInfo.artist ? songInfo.artist.name : songInfo.creator }</div>
-            </div>
-            <div className="flex  justify-end">
-              <div>
-                <LikeIcon info={songInfo} text={"4xl"} />
+        <div className="w-full ml-4 flex flex-col justify-between">
+          <div className="flex justify-between items-center">
+            <div className="flex flex-col">
+              <div className="text-3xl font-semibold">{songInfo.name}</div>
+              <div className="text-gray-400">
+                {songInfo.artist ? songInfo.artist.name : songInfo.creator}
               </div>
-
+            </div>
+            <div className="flex items-center text-3xl ">
+              <LikeIcon info={songInfo} size={"4xl"} />
               <i
-                class="fa-regular fa-add text-4xl hover:cursor-pointer hover:text-white mx-2 "
-                onClick={() => {
-                  setAddtolist(true);
-                }}
+                className="fa-solid fa-plus text-4xl hover:cursor-pointer hover:text-white mx-2"
+                onClick={() => setAddtolist(true)}
               ></i>
             </div>
           </div>
-          <div className="flex w-full justify-center items-center">
-            <div> {time} </div>
+          <div className="flex items-center mt-2">
+            <span>{time}</span>
             <input
               id="progressBar"
+              ref={progressBarRef}
               type="range"
-              name="range"
-              min={"0"}
-              max={"100"}
-              // value={0}
-              className="w-[90%]  mx-2  "
+              min="0"
+              max="100"
+              className="w-full mx-2"
               onChange={progressChange}
             />
-            <div> {duration} </div>
+            <span>{duration}</span>
           </div>
-          <div className=" w-[40%] h-[20%] justify-around flex items-center text-3xl ">
+          <div className="flex justify-around items-center text-3xl mt-2">
             <i
-              class="fa-solid fa-backward-step hover:cursor-pointer"
-              onClick={() => {
-                playPrevious();
-              }}
+              className="fa-solid fa-backward-step hover:cursor-pointer"
+              onClick={playPrevious}
             ></i>
             <div
-              onClick={() => {
-                togglePlay();
-              }}
-              className="w-10 h-10 hover:bg-slate-700 rounded-full  flex justify-center items-center"
+              onClick={togglePlay}
+              className="w-10 h-10 hover:bg-slate-700 rounded-full flex justify-center items-center"
             >
               {isPaused ? (
-                <i class={`fa-solid fa-play ml-[6px]`} />
+                <i className="fa-solid fa-play ml-1"></i>
               ) : (
-                <i class={`fa-solid fa-pause`} />
+                <i className="fa-solid fa-pause"></i>
               )}
             </div>
             <i
-              class="fa-solid fa-forward-step hover:cursor-pointer"
+              className="fa-solid fa-forward-step hover:cursor-pointer"
               onClick={playNext}
             ></i>
           </div>

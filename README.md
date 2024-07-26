@@ -12,13 +12,14 @@
 # in this project I have used React, NodeJs and MongoDb  
 
 This is my latest code  for Task 3 of the Delta Inductions 2024 (Web development).
-
+https://github.com/sir-shivam/DeltaWeb-Task3  
 
 # SetUp
 
-1. Clone the Repository 
+1. Clone the Repository  
  
  Clone the main Branch of this Repository.
+ add my link to copy  from github
 
 2. I have used MongoDb Atlas (Link is already Applied in the code)
 
@@ -27,7 +28,7 @@ This is my latest code  for Task 3 of the Delta Inductions 2024 (Web development
 
 
 3. for seting up Backend 
-  1.  run "cd backend"  in terminal
+  1.  run "cd backend"  in terminal (make copy button)
   2. "npm install"
   3. "nodemon"
   4. this will start local host 4000 
@@ -76,7 +77,7 @@ This is my latest code  for Task 3 of the Delta Inductions 2024 (Web development
    14.  progress bar of song --------(done)
 
    15.  Dauth ---------------(done);
-   16. Playlistduration -------------(done);
+   16. Playlist duration -------------(done);
    17. Liked songs Playlist ---------(done);
 
 

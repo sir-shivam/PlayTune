@@ -4,7 +4,14 @@ const userSchema  = new mongoose.Schema({
     name:String,
     email:String,
     password:String,
-    singer:Boolean,
+    singer: {
+        type: Boolean,
+        default: false
+      },
+    friends:[{
+        type: mongoose.Types.ObjectId,
+           ref: "users",
+    }],
     likedSongs:[
         {  
            

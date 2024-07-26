@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const User = require("./User");
+const FriendRequest = require('./FriendRequest');
 
 
 const generateToken = (email, userId) => {
@@ -102,6 +103,20 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" ,err: "error"});
   }
 });
+
+
+router.get("/user/all", async (req, res) => {
+
+  try {
+    let alluser = await User.find();
+    res.status(200).json(alluser);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal Server Error" ,err: "error"});
+  }
+});
+
 
 module.exports = router;
 

@@ -11,6 +11,8 @@ const Nav = () => {
   } else {
     test1 = false;
   }
+
+  // fixed top-12 z-10 md:static
   const Autherised = () => {
     return (
       <div className=" w-[100%] flex flex-col justify-center  items-center ">
@@ -50,13 +52,13 @@ const Nav = () => {
 
   return (
     <div>
-      <div className="w-[20vw] h-[96vh]  rounded-3xl  bg-gradient-to-bl from-[#3c0633] to-[#840f3b]  content-end pb-16 mt-4 ">
+      <div className="w-full h-24  md:w-[20vw] md:h-[96vh]   rounded-3xl  bg-gradient-to-bl from-[#3c0633] to-[#840f3b]  content-end pb-16 mt-4 ">
         <div className=" h-[30%]  ">
           <p className=" w-[60%] h-[80px] rounded-xl  ml-[15%] flex justify-center items-center text-white text-3xl bg-gradient-to-br   ">
             D-Tune
           </p>
         </div>
-        <ul className="Nav-ul flex flex-col justify-around items-center text-white  h-[60%]  ">
+        <ul className="Nav-ul flex flex-row md:flex-col justify-around items-center text-white  h-[60%]  ">
           <div className=" w-[80%] h-[8%] content-center pl-8   rounded-xl hover:border  cursor-pointer  ">
             <Link to="/home">
               <li>
