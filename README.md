@@ -83,8 +83,22 @@ https://github.com/sir-shivam/DeltaWeb-Task3
 
 
    ##  Completed Normal Mode #
+
+
    ##  started to work on Hacker mode #
 
+   1. Allow registration of artist account  ------Done
+   2. artist able to  upload  new music to the platform.-----done
+   3. Allow users to create private playlists. ------done
+   4. Add information on total duration of playlist when displaying it.------done
+   5. Make liked songs automatically available as a private playlist to the user---------done.
+   6. Users can send friend requests and accept it -----done . 
+   7. Users can be searched in same search bar but with a toggle on for searching people.-------done
+   8. Party Mode - Create a temporary playlist that is a combination of two playlists----------done.
+   9. Display lyrics of currently playing song (External APIs are allowed for this objective).--------(left)
 
+# Integrate authentication with DAuth.------------ done
+
+completed 90% of Hacker Mode ...
 
    ##   end   ##
