@@ -44,10 +44,10 @@ export default function SinglePlaylist() {
 
   return (
     <div>
-      <div className="full w-screen h-screen border  bg-[#0f0f0f] md:flex  ">
+      <div className="full w-screen h-screen   bg-[#0f0f0f] md:flex  ">
         <Nav />
 
-        <div className="md:w-[80vw] w-full h-[82vh] md:h-[93vh] border mt-8 text-white  p-10 overflow-auto">
+        <div className="md:w-[80vw] w-full h-[82vh] md:h-[93vh]  mt-8 text-white  p-10 overflow-auto">
           {loading ? (
             <Loader />
           ) : (

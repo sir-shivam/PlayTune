@@ -16,12 +16,13 @@ const playlistSchema  = new mongoose.Schema({
     visibilty: {
         type: String,
         enum: ["private", "public"],
-        default: "private",
+        default: "public",
       },
     totaltime: {
         type: Number,
         required: true, 
     },
+    isPartyMode: Boolean,
     songs :[
      {  
         
@@ -30,6 +31,9 @@ const playlistSchema  = new mongoose.Schema({
     
     },
     ],
+    expiresAt: { type: Date, default: undefined } ,
 });
+
+playlistSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0, partialFilterExpression: { expiresAt: { $exists: true } } });
 
 module.exports = mongoose.model("Playlists", playlistSchema);

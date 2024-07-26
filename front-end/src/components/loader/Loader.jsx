@@ -2,8 +2,11 @@ import React from "react";
 
 const Loader = () => {
   return (
-    <div class=" w-full h-full bg-gray-900 bg-opacity-10 z-50 flex justify-center items-center">
-      <div class="w-14 h-14 rounded-full border border-white border-t-[3px] border-opacity-75 animate-spin"></div>
+    <div className="w-full h-full bg-[#0f0f0f] bg-opacity-75 z-50 flex justify-center items-center ">
+      <div className="relative">
+        <div className="w-16 h-16 bg-gradient-to-r from-[#c81d77] to-[#6710c2] rounded-full animate-ping"></div>
+        <div className=" w-full h-full bg-gradient-to-r from-[#6710c2] to-[#c81d77] rounded-full opacity-50 animate-pulse"></div>
+      </div>
     </div>
   );
 };

@@ -7,6 +7,24 @@ import toast from "react-hot-toast";
 import { useNavigate } from 'react-router-dom';
 
 
+export const sendRequest = async (info) => {
+  try {
+    const recId = info._id;
+    const data = { recId };
+    console.log(data);
+
+    const response = await authPost("/request/create", data);
+      
+    toast.success(response.message);
+    console.log("Friend request sent successfully:", response);
+
+  } catch (error) {
+    toast.error('Error sending friend request');
+    console.error("Error sending friend request:", error);
+  } finally {
+  }
+};
+
 export default function FriendReq() {
 
     const [allUser, setallUser] = useState([]);
@@ -69,23 +87,7 @@ export default function FriendReq() {
   
 
 
-    const sendRequest = async (info) => {
-        try {
-          const recId = info._id;
-          const data = { recId };
-          console.log(data);
-      
-          const response = await authPost("/request/create", data);
-            
-          toast.success(response.message);
-          console.log("Friend request sent successfully:", response);
-      
-        } catch (error) {
-          toast.error('Error sending friend request');
-          console.error("Error sending friend request:", error);
-        } finally {
-        }
-      };
+    
 
     const allfriend1 = async () => {
         setLoading1(true);

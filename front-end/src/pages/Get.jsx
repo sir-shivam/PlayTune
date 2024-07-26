@@ -32,7 +32,7 @@ const TokenRequest = () => {
       const tokenEndpoint = "https://auth.delta.nitt.edu/api/oauth/token";
       const clientId = "AyNc3hK4wBdsnBtA"; 
       const clientSecret = "a~.nrEafu54su6uUGwc0qAf44H0iuCPT"; //process.env.REACT_APP_CLIENT_SECRET; 
-      const redirectUri = "http://localhost:3000/callback";
+      const redirectUri = "https://dtune.vercel.app/callback";
 
       const data = {
         client_id: clientId,

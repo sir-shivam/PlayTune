@@ -58,19 +58,21 @@ const SignUp = () => {
     }, 5000);
   };
 
+          
   return (
     <div>
-      <div className="full w-screen h-screen bg-[#0f0f0f] flex">
-        <div className="w-[880px] h-[680px] mt-9 flex justify-center items-center relative">
-          <div>
-            <p className="text-[#628eff]  text-[4rem] mb-[-4%] ">D-Tune</p>
-            <p className="text-[5rem] text-white  ">Welcomes You !!</p>
+       <div className=" w-screen h-screen bg-[#0f0f0f] flex flex-col justify-center items-center md:flex-row">
+        <div className="md:w-[880px] w-screen   h-[80px] md:h-[680px]   flex flex-col md:flex-row justify-center items-center relative"><div>
+        <div className="mt-[-18%]">
+            <p className="text-[#628eff]  md:text-[4rem] text-[2rem] mb-[-4%] ">D-Tune</p>
+            <p className="md:text-[5rem] text-[3rem]  text-white  ">Welcomes You !!</p>
             {/* <p className='text-[1.3rem] text-white underline mt-[-4%] ml-[1rem] '>Play the Beat !!</p> */}
           </div>
-          <div className="w-[302px] h-[302px]   rounded-[50%] bg-gradient-to-b from-[#430356] to-[#0f0f0f] absolute ml-[90%] mt-[-52%]  "></div>
-          <div className="w-[220px] h-[220px]   rounded-[50%]  bg-gradient-to-tl from-[#430356] to-[#0f0f0f] absolute ml-[200%]  mt-[69%] "></div>
+          </div>
+          <div className="md:w-[302px] md:h-[302px] w-[180px] h-[180px]   rounded-[50%] bg-gradient-to-b from-[#430356] to-[#0f0f0f] md:absolute fixed top-[180px] left-2 md:left-auto md:top-auto  md:ml-[90%] md:mt-[-60%]  "></div>
+          <div className="md:w-[220px] md:h-[220px] w-[160px] h-[160px]   rounded-[50%]  bg-gradient-to-tl from-[#430356] to-[#0f0f0f] md:absolute md:ml-[200%]  md:mt-[69%] md:right-auto md:bottom-auto  fixed bottom-0 right-4 "></div>
         </div>
-        <div className="frame1 w-[480px] h-[680px] border-[0.1px]  rounded-2xl end mt-14  z-[2] flex flex-col justify-center items-center">
+        <div className="frame1  md:w-[480px] md:h-[680px] w-[420px] h-[600px]  border-[0.1px]  rounded-2xl end mt-5 md:mt-0  z-[2] flex flex-col justify-center items-center">
           <div className="status text-3xl text-white ml-[45%] ">Sign In...</div>
           <div className="status text-sm text-white mb-2 ml-[52%] ">
             Enjoy Listening!

@@ -4,6 +4,8 @@ import { authPost } from "../utils/serverFetch";
 export default function CreatePlaylist({ closeModel }) {
   const [playlistName, setPlaylistName] = useState("");
   const [thumbnail, setThumbnail] = useState("");
+const [isPrivate, setIsPrivate] = useState(false); 
+
 
   const handlePlaylistNameChange = (event) => {
     setPlaylistName(event.target.value);
@@ -13,12 +15,17 @@ export default function CreatePlaylist({ closeModel }) {
     setThumbnail(event.target.value);
   };
 
+  const handleIsPrivateChange = (event)=>{
+    setIsPrivate(event.target.checked);
+  }
+
   const createPlaylist = async () => {
     try {
       const response = await authPost("/playlist/create", {
         name: playlistName,
         thumbnail,
         songs: [],
+        private: isPrivate, 
       });
 
       if (response._id) {
@@ -61,6 +68,14 @@ export default function CreatePlaylist({ closeModel }) {
             value={thumbnail}
             onChange={handleThumbnailChange}
           />
+
+
+          <div className="flex items-center ">
+  <input type="checkbox" className="h-6 w-6 mr-2" checked={isPrivate} onChange={handleIsPrivateChange} />
+  <label className="h-12 pt-3 ">Private Playlist</label>
+</div>
+
+
         </div>
         <div
           className="bg-white w-1/3 rounded-lg flex font-bold justify-center h-[40px] items-center ml-[60%]"
@@ -72,3 +87,4 @@ export default function CreatePlaylist({ closeModel }) {
     </div>
   );
 }
+

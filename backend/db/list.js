@@ -2,15 +2,16 @@ const express = require("express");
 const Song = require("./Song");
 const Playlist = require("./Playlist");
 const router = express.Router();
+const mongoose = require("mongoose");
 
 router.post("/create", async (req,res) => {
     const loggedUser = req.user;
-    const {name , thumbnail , songs} = req.body;
+    const {name , thumbnail , songs , private} = req.body;
     if(!name || !thumbnail ){
     return res.status(400).json("change data");
 
     }
-    const playlist = await Playlist.create({name , thumbnail ,  owner: req.user.id, songs :songs});
+    const playlist = await Playlist.create({name , thumbnail ,  owner: req.user.id, songs :songs , private: private});
     return res.status(200).json(playlist);
 } );
 
@@ -123,10 +124,72 @@ const listData = [
       totaltime: 0,
       songs: []
     },
-  ];
+  ]; 
   
 
+router.post("/party/mode", async (req, res) => {
+  try {
+    const { playlistId1, playlistId2 } = req.body;
 
+    const playlist1 = await Playlist.findById(playlistId1);
+    const playlist2 = await Playlist.findById(playlistId2);
+
+    if (!playlist1 || !playlist2) {
+      return res.status(404).json({ error: "One or both playlists not found" });
+    }
+
+    const combinedSongs = [...playlist1.songs, ...playlist2.songs];
+
+    const uniqueSongs = Array.from(new Set(combinedSongs.map(String))).map(
+      id => new mongoose.Types.ObjectId(id)
+    );
+    const totalTime = await calculateTotalTime(uniqueSongs);
+    const expirationTime = new Date();
+    expirationTime.setHours(expirationTime.getHours() + 1);
+
+
+    const temporaryPlaylist = await Playlist.create({
+      name: `Party Mode: ${playlist1.name} + ${playlist2.name}`,
+      thumbnail: "https://images.unsplash.com/photo-1479750178258-aec5879046ce?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHBhcnR5fGVufDB8fDB8fHww", 
+      owner: req.user.id, 
+      songs: uniqueSongs,
+      totaltime: totalTime,
+      visibility: "public",
+      isPartyMode: true,
+      expiresAt: expirationTime,
+    });
+
+    return res.status(200).json(temporaryPlaylist);
+  } catch (error) {
+    console.error("Error creating temporary playlist:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+async function calculateTotalTime(songs) {
+  let totalTime = 0;
+  for (const songId of songs) {
+    const song = await Song.findById(songId);
+    if (song) {
+      totalTime += song.time;
+    }
+  }
+  return totalTime;
+}
+
+
+router.get("/party", async (req, res) => {
+  try {
+    const partyPlaylists = await Playlist.find({
+      name: { $regex: /Party Mode/i }
+    });
+
+    res.status(200).json(partyPlaylists);
+  } catch (error) {
+    console.error("Error fetching Party Mode playlists:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 
 module.exports = router;

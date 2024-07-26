@@ -22,9 +22,14 @@ export default function MySong() {
 
   return (
     <div>
-      <div className="full w-screen h-screen bg-[#0f0f0f] flex">
-        <Nav />
-        <div className="w-[80vw] h-[100vh]  p-8">
+      <div className="full w-screen h-screen bg-[#0f0f0f] flex ">
+      <div className="hidden md:block">
+      <Nav />
+      </div>
+      <div className="w-full  md:w-[80vw]  h-full md:p-8">
+      <div className=" md:hidden">
+      <Nav />
+      </div>
           <div className="text-lg font-semibold text-white pb-4 pl-2 ">
             My Songs
           </div>

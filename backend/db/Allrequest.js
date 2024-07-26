@@ -42,6 +42,18 @@ router.post("/create", async (req, res) => {
       res.status(500).json({ message: "Internal Server Error" });
     }
   });
+
+  router.get("/checkrequest/byme", async (req, res) => {
+    try {
+      const loggedUserId = req.user.id;
+  
+      const requests = await FriendRequest.find({ sender: loggedUserId });
+      res.status(200).json(requests);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  });
   
 
   router.post('/accept/:requestId', async (req, res) => {

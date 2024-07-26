@@ -5,6 +5,27 @@ import { useNavigate } from "react-router-dom";
 import CreatePlaylist from "../pages/CreatePlaylist";
 import Loader from "./loader/Loader";
 
+
+export const PlaylistCard = ({ info, playlistId }) => {
+  const navigate = useNavigate();
+  return (
+    <div
+      className=" w-full   border-opacity-80 bg-gray-400 bg-opacity-10 hover:bg-opacity-30 rounded-2xl m-8 flex  flex-col  items-center cursor-pointer pt-4 "
+      onClick={() => {
+        navigate("/playlist/view/" + playlistId);
+      }}
+    >
+      <img
+        alt="thumbnail"
+        src={info.thumbnail}
+        className="box1  w-[80%] h-[70%] mt-3 rounded-xl "
+      ></img>
+      <div className=" w-[80%]  text-2xl m-4">{info.name} </div>
+      <div className="text-white ml-[-10px]">Total Duration : {(info.totaltime).toFixed(2)} min</div>
+    </div>
+  );
+};
+
 export default function Library() {
   const [PlaylistModel, setPlaylistModel] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -52,25 +73,7 @@ const letupdate = async(item)=>{
 
   
 
-  const PlaylistCard = ({ info, playlistId }) => {
-    const navigate = useNavigate();
-    return (
-      <div
-        className=" w-full   border-opacity-80 bg-gray-400 bg-opacity-10 hover:bg-opacity-30 rounded-2xl m-8 flex  flex-col  items-center cursor-pointer pt-4 "
-        onClick={() => {
-          navigate("/playlist/view/" + playlistId);
-        }}
-      >
-        <img
-          alt="thumbnail"
-          src={info.thumbnail}
-          className="box1  w-[80%] h-[70%] mt-3 rounded-xl "
-        ></img>
-        <div className=" w-[80%]  text-2xl m-4">{info.name} </div>
-        <div className="text-white ml-[-10px]">Total Duration : {(info.totaltime).toFixed(2)} min</div>
-      </div>
-    );
-  };
+  
 
   return (
     <div>
@@ -87,7 +90,7 @@ const letupdate = async(item)=>{
       <Nav />
       </div>
 
-        <div className=" h-[100%] w-[100%]  border   text-white">
+        <div className=" h-[100%] w-[100%]     text-white">
         <div className=" md:hidden">
       <Nav />
       </div>
