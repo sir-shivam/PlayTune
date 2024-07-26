@@ -1,4 +1,5 @@
-export const backendURL = "https://deltaweb-task3.onrender.com";
+// export const backendURL = "https://deltaweb-task3.onrender.com";
+export const backendURL = "http://localhost:4000";
 
 
 
