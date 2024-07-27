@@ -29,7 +29,7 @@ const authorizationUrl = `https://auth.delta.nitt.edu/authorize?` +
 
   const collectData = async () => {
     if(!email || !password){
-      toast.error("please enter both the fields");
+      return toast.error("please enter both the fields");
     }
     try {
       setLoading(true);
