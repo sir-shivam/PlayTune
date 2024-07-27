@@ -8,6 +8,9 @@ export function SongCard({ info, playSound }) {
   const { songInfo, setSongInfo } = useContext(SongContext);
   const { Songclicked, setSongclicked } = useContext(SongContext);
   const [total, setTotal] = useState("3:55");
+  const [likes , setlikes] = useState(0);
+  const {isMinimized, setIsMinimized} = useContext(SongContext) ;
+
   let sound1;
 
   useLayoutEffect(() => {
@@ -16,6 +19,8 @@ export function SongCard({ info, playSound }) {
     sound1.addEventListener("canplay", () => {
       setTotal((sound1.duration / 60).toFixed(2));
     });
+
+    setlikes(info.likes.length)
   }, [info.track]);
 
   return (
@@ -24,6 +29,7 @@ export function SongCard({ info, playSound }) {
       onClick={() => {
         setSongInfo(info);
         setSongclicked(sound1);
+        setIsMinimized(false);
       }}
     >
       <div
@@ -42,8 +48,8 @@ export function SongCard({ info, playSound }) {
         </div>
         <div className="w-2/6 text-gray-400 flex justify-around items-center">
           <div className="flex justify-center items-center">
-            <div>{info.likes.length}</div>
-            <LikeIcon info={info} text="2xl" />
+            <div>{likes}</div>
+            <LikeIcon info={info} text="2xl" setlikes={setlikes} />
           </div>
           <div>{total}</div>
         </div>

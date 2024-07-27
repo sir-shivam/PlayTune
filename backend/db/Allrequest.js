@@ -126,6 +126,14 @@ router.post("/create", async (req, res) => {
       res.status(500).json({ message: 'Internal Server Error' });
     }
   });
+
+  router.get("/view", async (req , res) => {
+    const userId = req.user._id;
+    const info = await User.findById(userId);
+    res.status(200).json(info);
+
+
+  })
   
   
 

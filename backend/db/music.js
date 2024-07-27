@@ -146,7 +146,7 @@ router.get("/get/all" , async (req, res) => {
 } )
 
 router.post("/like", async (req, res) => {
-  const loggedUserId = req.user.id;
+  const loggedUserId = req.user._id;
   const { songId } = req.body;
 
   try {
@@ -192,24 +192,20 @@ router.post("/likestatus", async (req, res) => {
 });
 
 router.post("/unlike", async (req, res) => {
-  const loggedUserId = req.user.id;
+  const loggedUserId = req.user._id;
   const { songId } = req.body;
 
   try {
-    const updatedSong = await Song.findOneAndUpdate(
-      { likes: { $in: [loggedUserId] } },
-      { $pull: { likes: loggedUserId } } 
-    );
-    const person = await User.findOneAndUpdate(
-      { likedSongs: { $in: [songId] } },
-      { $pull: { likedSongs: songId } } 
-    );
+    const song1 = await Song.findOne({ _id: songId });
+    const person = await User.findOne({_id : loggedUserId});
+    song1.likes.pull(loggedUserId);
+    await song1.save();
+    person.likedSongs.pull(songId);
+    await person.save();
 
-    if (!updatedSong) {
-      return res.status(404).json("Song not found or already unliked"); 
-    }
+    
 
-    return res.status(200).json(updatedSong);
+    return res.status(200).json(song1);
   } catch (error) {
     console.error(error);
     return res.status(500).json("Internal Server Error");

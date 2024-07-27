@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SongContext from "./context";
 import Streaming from "./Streaming";
+import { authGet } from "../utils/serverFetch";
 
 function NoteState({ children }) {
   const [songInfo, setSongInfo] = useState({});
@@ -8,11 +9,12 @@ function NoteState({ children }) {
   const [Songclicked, setSongclicked] = useState(null);
   const [code , setcode] = useState(null);
   const [detail , setdetail] = useState({});
+  const [currentUser , setCurrentUser] = useState({});
+  const [isMinimized, setIsMinimized] = useState(false);
 
 
 
 
-  console.log(songInfo);
 
   return (
     <SongContext.Provider
@@ -27,6 +29,10 @@ function NoteState({ children }) {
         setcode,
         detail , 
         setdetail,
+        currentUser , 
+        setCurrentUser,
+        isMinimized,
+        setIsMinimized
       }}
     >
       {songInfo.name ? <Streaming /> : ""}

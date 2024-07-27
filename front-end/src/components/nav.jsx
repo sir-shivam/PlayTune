@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useCookies } from "react-cookie";
 import { Link, useNavigate , useLocation} from "react-router-dom";
+import SongContext from "./context";
 
 const Nav = () => {
   let test1;
@@ -8,6 +9,8 @@ const Nav = () => {
   const currentLocation = useLocation();
   const [activeLink, setActiveLink] = useState(currentLocation.pathname);
   const navigate = useNavigate();
+  const { Songclicked, setSongclicked } = useContext(SongContext);
+
   if (cookie.token) {
     test1 = true;
   } else {
@@ -53,7 +56,8 @@ const Nav = () => {
 
   const logout = () => {
     deleteCookie("token");
-    navigate("/login");
+    Songclicked(false);
+    // navigate("/login");
   };
 
   return (
