@@ -1,6 +1,6 @@
 import { OpenUploadWidget } from "../utils/cloudinaryService";
 
-const CloudinaryUpload = ({ setUrl, setName }) => {
+const CloudinaryUpload = ({ setUrl, setName , settime}) => {
   const uploadImageWidget = () => {
     let myUploadWidget = OpenUploadWidget(
       {
@@ -13,6 +13,7 @@ const CloudinaryUpload = ({ setUrl, setName }) => {
           console.log(result);
           setUrl(result.info.secure_url);
           setName(result.info.original_filename);
+          settime(result.info.duration/60);
         } else {
           if (error) {
             console.log(error);

@@ -10,18 +10,20 @@ export default function SongUpload() {
   const [thumbnail, setThumbnail] = useState("");
   const [playUrl, setPlayUrl] = useState("");
   const [songName, setSongname] = useState();
+  const [songtime , setsongtime] = useState(0);
   const navigate = useNavigate();
 
 
 
   const submitSong = async () => {
     try {
-      const data = { name, thumbnail, track: playUrl };
-      const response = await authPost("/song/create", data);
+      const data = {  name: `${songName}(${name})`, thumbnail , track: playUrl , time: `${songtime}` } ;
+      const response = await authPost("/song/creator" , data);
+      console.log(response);
       if (response.err) {
         toast.success("Could not upload");
       } else {
-        toast.success("Success");
+        toast.success("Success",response);
         navigate("/home");
       }
     } catch (error) {
@@ -62,7 +64,7 @@ export default function SongUpload() {
             {songName.substring(0, 20)}...
           </div>
         ) : (
-          <CloudinaryUpload setUrl={setPlayUrl} setName={setSongname} />
+          <CloudinaryUpload setUrl={setPlayUrl} setName={setSongname} settime={setsongtime} />
         )}
       </div>
       <div

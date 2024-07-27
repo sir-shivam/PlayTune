@@ -48,12 +48,12 @@ export default function MySong() {
           {loading ? <Loader /> :
           
           
-          <div className="space-y-3 overflow-auto">
-            songData.length ? <div className="text-white h-28 font-bold text-2xl flex justify-center items-center " > No Liked Songs </div> :
-            {songData.map((item) => {
-              return <SongCard info={item} />;
-            })}
-          </div>
+          <div className="space-y-3 h-[95%] overflow-auto ">{
+            songData.length==0 ? (<div className="text-white h-28 font-bold text-2xl flex justify-center items-center " > No Liked Songs </div>):(
+            songData.map((item) => {
+              return <SongCard info={item} />
+            }))
+}</div>
 }
 
 
