@@ -6,17 +6,26 @@ const mongoose = require("mongoose");
 
 router.post("/create", async (req,res) => {
     const loggedUser = req.user;
-    const {name , thumbnail , songs , private} = req.body;
+    const {name , thumbnail , songs , visibilty } = req.body;
     if(!name || !thumbnail ){
     return res.status(400).json("change data");
 
     }
-    const playlist = await Playlist.create({name , thumbnail ,  owner: req.user.id, songs :songs , private: private});
+    // const playlist = await Playlist.create({name , thumbnail ,  owner: req.user.id, songs :songs , visibilty : visibilty});
+    const playlist = await Playlist.create({
+      name: name,
+      thumbnail: thumbnail, 
+      owner: req.user.id, 
+      songs: songs,
+      totaltime: 0,
+      visibility: visibilty,
+      isPartyMode: false,
+    });
     return res.status(200).json(playlist);
 } );
 
 router.get("/get/all", async (req,res)=> {
-    const playlistId = req.user.id;
+    
     const playlist = await Playlist.find();
     return res.send(playlist);
 })

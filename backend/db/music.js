@@ -6,19 +6,34 @@ const router = express.Router();
 const { spawn } = require('child_process');
 
 
-router.post("/create", async (req,res) =>{
-    const {name , thumbnail , track  } = req.body;
-    if(!name || !thumbnail || !track ){
-      return res.status(401).json("try again");
-    }
+router.post("/creator", async (req, res) => {
+  const { name, thumbnail, track, time } = req.body;
 
+  if (!name || !thumbnail || !track || !time) {
+    return res.status(400).json({ error: `${name ,thumbnail,track,time}` });
+  }
+
+  try {
     const loggedUserId = req.user.id;
-    let play = "noone";
-    
-    const songCreated = await Song.create({name , thumbnail , track , creator: play , artist : loggedUserId}); 
-    return res.status(200).json(songCreated);
-    
-} );
+    const play = "noone";
+
+    const songCreated = await Song.create({
+      name,
+      time,
+      thumbnail,
+      track,
+      creator: play,
+      artist: loggedUserId
+    });
+
+    return res.status(201).json(songCreated);
+  } catch (error) {
+    console.error("Error creating song:", error);
+    return res.status(500).json({ error: "An error occurred while creating the song" });
+  }
+});
+
+
 
 router.post("/insert", async (req,res)=>{
     // res.send("working");
@@ -77,6 +92,12 @@ const getAudioDuration = async (track) => {
   });
 };
 
+
+router.post("/get", async (req,res) =>{
+    
+  
+  return res.status(200).json("hello");  
+} );
 
 
 router.get("/get/mylikedsongs", async (req,res) =>{

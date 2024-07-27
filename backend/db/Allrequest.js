@@ -75,8 +75,8 @@ router.post("/create", async (req, res) => {
   
       const sender = await User.findById(friendRequest.sender);
       const receiver = await User.findById(friendRequest.receiver);
-      sender.friends.push(receiver._id);
-      receiver.friends.push(sender._id);
+      (sender.friends).push(receiver._id);
+      (receiver.friends).push(sender._id);
       await sender.save();
       await receiver.save();
   

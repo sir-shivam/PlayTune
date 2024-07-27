@@ -1,58 +1,74 @@
-# This is 3rd Task for Delta Club (NIT-Trichy)
-
-
-# backend is live at 
-
-   https://deltaweb-task3.onrender.com
-
-# Frontend with Backend is live at 
-
-   https://dtune.vercel.app
+# Delta Web Task 3 - Code Overview
 
 # in this project I have used React, NodeJs and MongoDb  
 
 This is my latest code  for Task 3 of the Delta Inductions 2024 (Web development).
 https://github.com/sir-shivam/DeltaWeb-Task3  
 
-# SetUp
+# Setup
 
-1. Clone the Repository  
- 
- Clone the main Branch of this Repository.
- add my link to copy  from github
+### 1. Clone the repository
+Clone the **main** branch of this repo into your folder
 
 2. I have used MongoDb Atlas (Link is already Applied in the code)
 
-# I haven't set any private file for ease purpose 
-  so need need for setting Env file 
+### 2. I am Using MongoDb Atlas 
+mongoDb Atlas online version
+
+### 3. Open seperate terminals for client and react folders
+From the main repo folder, cd backend and cd front-end in different terminals
+
+### 4. for seting up Backend 
+   Move to backend file in terminal using
+   ```
+   cd backend
+   ```
+
+   Install all required package.json by using 
+   ```
+   npm install
+   ``` 
+
+   Start the Backend Client by running "nodemon" in terminal
+   ```
+   nodemon
+   ```
+
+   This will start backend Terminal on local host 4000 
+   if you want to change the local host ====>   backend >  index.js > change the "port" value
+
+### 4. For setting up frontend File 
+
+    Move to front-end file in new terminal using
+   ```
+   cd front-end
+   ```
+
+   Install all required package.json by using 
+   ```
+   npm install
+   ``` 
+
+   Start the Backend by running "npm start" in terminal
+   ```
+   npm start
+   ```
+
+   this will automatically start the front-end at local host 3000
+
+   if you have changed the backend local host then **update** in   front-end > src > utils > confg.jsx   file
 
 
-3. for seting up Backend 
-  1.  run "cd backend"  in terminal (make copy button)
-  2. "npm install"
-  3. "nodemon"
-  4. this will start local host 4000 
-
-4. For setting up frontend File 
-   1. run "cd ../front-end" to move directly to frontend file using terminal
-   2. "npm install"
-   3. "npm start"   this code will automatically start the frontend at local host 3000
-
-
-# important Note 
-   1. I have deployed backend on render  and its URL is commented in config.js filr which is in path "/front-end/src/utils/config.js"
+## important Note 
+   1. I have deployed backend on render  and its URL is commented in config.js file  which is in path "/front-end/src/utils/config.js"
    2. it can be used instead of local host 4000
 
+##  The web app is up and running!! , Enjoy the Song
 
-#   The web app is up and running!! , Enjoy the Song
-
-# In Future you can simply run 
+### In Future you can simply run 
 
    1. "nodemon" in backend file and
    2. "npm start" in forntend file
-
-
-
 
 # STEPS i have used or Devlopment
 
@@ -81,7 +97,6 @@ https://github.com/sir-shivam/DeltaWeb-Task3
    17. Liked songs Playlist ---------(done);
 
 
-
    ##  Completed Normal Mode #
 
 
@@ -98,6 +113,7 @@ https://github.com/sir-shivam/DeltaWeb-Task3
    9. Display lyrics of currently playing song (External APIs are allowed for this objective).--------(left)
 
 # Integrate authentication with DAuth.------------ done
+  **Dauth Loging is working only on local host 3000**
 
 completed 90% of Hacker Mode ...
 
