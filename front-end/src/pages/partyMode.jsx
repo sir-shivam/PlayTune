@@ -41,7 +41,7 @@ export default function CombinePlaylists({ closeModel }) {
 
   return (
     <div
-      className="absolute w-screen h-screen bg-[#0f0f0f] z-[4] bg-opacity-40 flex justify-center items-center"
+      className="absolute w-screen h-screen bg-[#0f0f0f] z-[4] bg-opacity-40 flex justify-center items-center text-black"
       onClick={closeModel}
     >
       <div
@@ -58,7 +58,7 @@ export default function CombinePlaylists({ closeModel }) {
               id="playlist1"
               value={playlist1Id}
               onChange={(e) => setPlaylist1Id(e.target.value)}
-              className="p-2 rounded-md border border-black"
+              className="p-2 rounded-md border border-black "
             >
               <option value="" disabled>Select a playlist</option>
               {playlists.map((playlist) => (

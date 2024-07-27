@@ -20,7 +20,7 @@ export function SongCard({ info, playSound }) {
 
   return (
     <div
-      className="flex h-[6rem] hover:bg-gray-500 hover:bg-opacity-35 p-2 rounded-md"
+      className="flex h-[6rem] hover:bg-gray-500 hover:bg-opacity-35 pl-4  p-2  rounded-md"
       onClick={() => {
         setSongInfo(info);
         setSongclicked(sound1);

@@ -32,7 +32,7 @@ const TokenRequest = () => {
       const tokenEndpoint = "https://auth.delta.nitt.edu/api/oauth/token";
       const clientId = "AyNc3hK4wBdsnBtA"; 
       const clientSecret = "a~.nrEafu54su6uUGwc0qAf44H0iuCPT"; //process.env.REACT_APP_CLIENT_SECRET; 
-      const redirectUri = "https://dtune.vercel.app/callback";
+      const redirectUri = "http://localhost:3000/callback";
 
       const data = {
         client_id: clientId,
@@ -44,10 +44,9 @@ const TokenRequest = () => {
 
       const formUrlEncoded = new URLSearchParams(data).toString();
 
-      let response = await axios.get("/api/oauth/token", formUrlEncoded, {
+      const response = await axios.post("/api/oauth/token", formUrlEncoded, {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
-      response = response.json();
       console.log(response.data);
       setAccessToken(response.data.access_token);
       nextToken(response.data.access_token);

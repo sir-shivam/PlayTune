@@ -38,7 +38,7 @@ const Nav = () => {
 
   const UnAutherised = () => {
     return (
-      <div className=" w-[120px] mt-4 h-[50px] content-center    rounded-xl hover:border  cursor-pointer pl-[25%] text-sky-500 ml-[10%] ">
+      <div className=" w-[80%] mt-4 h-[50px] content-center    rounded-xl hover:border  cursor-pointer pl-[25%] text-sky-500 ml-[10%] ">
         <Link onClick={logout} to="/login">
           <li>Logout</li>
         </Link>

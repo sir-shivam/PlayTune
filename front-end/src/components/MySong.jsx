@@ -3,6 +3,7 @@ import { SongCard } from "./SongCard";
 import Nav from "./nav";
 import { authGet } from "../utils/serverFetch";
 import SongContext from "./context";
+import Loader from "./loader/Loader";
 
 export default function MySong() {
   const [songData, setSongData] = useState([]);
@@ -10,13 +11,23 @@ export default function MySong() {
 
   const [soundPlayed, setsoundPlayed] = useState(null);
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const getData = async () => {
-      const response = await authGet("/song/get/mylikedsongs");
-      setSongData(response.likedSongs);
-      setCurrentData(response.likedSongs);
-      console.log(response);
+      setLoading(true);
+      try {
+        const response = await authGet("/song/get/mylikedsongs");
+        setSongData(response.likedSongs);
+        setCurrentData(response.likedSongs);
+        console.log(response);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
     };
+
     getData();
   }, []);
 
@@ -33,11 +44,19 @@ export default function MySong() {
           <div className="text-lg font-semibold text-white pb-4 pl-2 ">
             My Songs
           </div>
+
+          {loading ? <Loader /> :
+          
+          
           <div className="space-y-3 overflow-auto">
+            songData.length ? <div className="text-white h-28 font-bold text-2xl flex justify-center items-center " > No Liked Songs </div> :
             {songData.map((item) => {
               return <SongCard info={item} />;
             })}
           </div>
+}
+
+
         </div>
       </div>
     </div>

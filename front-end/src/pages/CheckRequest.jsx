@@ -34,7 +34,7 @@ export default function CheckRequest() {
       const  Usercard = ({info}) => {
         return(
         <div
-      className="flex h-[6rem] hover:bg-gray-500 hover:bg-opacity-35   p-2 rounded-md  "
+      className="flex h-[6rem] hover:bg-gray-500 hover:bg-opacity-35 bg-gray-800   p-2 rounded-xl  "
       
     >
       <div className="flex  w-full pr-5">
@@ -46,10 +46,10 @@ export default function CheckRequest() {
         </div>
         <div className="w-2/6 flex justify-around items-center ">
           <div className="flex justify-between items-center">
-            <div className='border rounded-xl p-2 mx-8 cursor-pointer'onClick={()=>{
+            <div className='border rounded-xl p-2 m-2 md:mx-8 cursor-pointer hover:bg-pink-300'onClick={()=>{
                 acceptRequest(info)
             }}>  Accept </div>
-            <div className='border rounded-xl p-2  cursor-pointer ' onClick={()=>{
+            <div className='border rounded-xl p-2  cursor-pointer  hover:bg-red-500' onClick={()=>{
                 rejectRequest(info);
             }}>Reject</div>
           </div>
@@ -99,21 +99,22 @@ export default function CheckRequest() {
 
   return (
 <div>
-          <div className="full w-screen h-screen bg-[#0f0f0f] flex ">
+          <div className="full w-screen h-screen bg-[#0f0f0f] flex flex-col md:flex-row ">
             <Nav />
     
-            <div className="w-[80vw] h-[93vh] mt-8 text-white  p-10 overflow-auto">
-            <div className="flex justify-center items-center font-bold text-2xl mt-[-30px] h-16  ">
-                        Friend Request
+            <div className="md:w-[80vw] w-full h-[93vh] mt-8 text-white  p-10 overflow-auto">
+            <div className="flex justify-center items-center font-bold text-2xl mt-[-30px] h-16 border-b-2 ">
+                        Friend Request ({allReqest.length})
                       </div>
               {loading ? (
                 <Loader/>
               ) : (
+                !allReqest ? <div className='text-white h-2/5 w-full flex justify-center items-center font-bold text-2xl '> You Don't have any Friend request</div>:
                 <>
                   { 
                     <div>
                       
-                      <div className="space-y-3 h-[80%]   ">
+                      <div className="space-y-3 h-[80%]  mt-4 ">
                         {allReqest.map((item) => {
                           return (
                             <Usercard

@@ -75,7 +75,7 @@ export default function Home() {
               <p className="cursor-pointer">Shivam</p>
               <p>India</p>
             </div> */}
-            {isSinger && (
+            { isSinger && (
               <div className="text-white cursor-pointer ml-4">Upload song</div>
             )}
           </div>
@@ -88,7 +88,10 @@ export default function Home() {
           ) : (
             <div className="grid gap-4 md:gap-8 grid-cols-2 md:grid-cols-3">
               {myList1.map((item) => (
+                item.visibilty == "public" ? 
                 <PlaylistCard1 key={item._id} info={item} playlistId={item._id} />
+                :
+                ""
               ))}
             </div>
           )}

@@ -13,7 +13,8 @@ const Login = () => {
   const navigate = useNavigate();
 
 const clientId = 'AyNc3hK4wBdsnBtA'; 
-const redirectUri = 'https://dtune.vercel.app/callback'; 
+const redirectUri = 'http://localhost:3000/callback'; 
+// const redirectUri = 'https://dtune.vercel.app/callback'; 
 const scopes = ['openid','email', 'profile', 'user']; 
 
 

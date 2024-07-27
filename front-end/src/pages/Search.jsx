@@ -5,6 +5,39 @@ import { SongCard } from "../components/SongCard";
 import SongContext from "../components/context";
 import { sendRequest } from "./FriendReq";
 
+
+
+
+export const getButtonText = (user , reqSent) => {
+  let state = "Send Friend Request";
+  reqSent.forEach((e)=>{
+  console.log(e.sender);
+
+    if(e.receiver === user._id){
+
+    if (e.status === "pending") {
+      state ="Friend Request Already Sent"
+      
+    }
+    if (e.status === "accepted") {
+      state = "Friend";
+      
+    }
+    if (e.status === "rejected") {
+      state = "Rejected, Send Again";
+      
+    }
+    
+  }
+  else if((user.friends).includes(e.sender)){
+    state = "Friend";
+  }
+  })
+
+  return state;
+  
+};
+
 export default function Search() {
   const [isFocus, setFocus] = useState(false);
   const [searchText, setsearchText] = useState("");
@@ -40,33 +73,11 @@ export default function Search() {
 
     } catch (error) {
       console.error('Error checking friend request:', error);
-      // Handle error, e.g., show an error message
+      
     }
   };
 
-  const getButtonText = (user) => {
-    let state = "Send Friend Request";
-    reqSent.forEach((e)=>{
-      if(e.receiver === user._id){
   
-      if (e.status === "pending") {
-        state ="Friend Request Already Sent"
-        
-      }
-      if (e.status === "accepted") {
-        state = "Friend";
-        
-      }
-      if (e.status === "rejected") {
-        state = "Rejected, Send Again";
-        
-      }
-    }
-    })
-
-    return state;
-    
-  };
 
   return (
     <div>
@@ -79,9 +90,9 @@ export default function Search() {
       <Nav />
       </div>
           <div className="h-28 flex justify-center items-center">
-            <div className="w-4/5 h-full flex justify-center items-center ml-24">
+            <div className="w-4/5 h-full   flex justify-center items-center ml-[-5%] md:ml-16">
               <div
-                className={`w-[80%]  h-[50%] rounded-full bg-gray-800 flex pl-5 justify-center items-center ${
+                className={`w-[80%]  h-[50%] rounded-full bg-gray-800 flex  pl-5 justify-center items-center ${
                   isFocus ? "border border-white" : ""
                 }`}
               >
@@ -150,7 +161,7 @@ export default function Search() {
                     sendRequest(user);
                   }}
                   >
-                   {getButtonText(user)}
+                   {getButtonText(user, reqSent)}
                   </button>
                 </div>
               ))}

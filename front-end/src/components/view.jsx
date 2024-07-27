@@ -32,12 +32,17 @@ export default function View() {
   return (
     <div>
       <div className="full w-screen h-screen bg-[#0f0f0f] flex">
-        <Nav />
-        <div className="h-[90%] w-[90%] mt-2">
+      <div className="hidden md:block">
+      <Nav />
+      </div>
+      <div className="h-[84%] md:h-[95%] md:w-[90%]   mt-2  md:p-2">
+      <div className=" md:hidden">
+      <Nav />
+      </div>
           <div className="h-[8%] text-white w-[80%] ml-[10%] flex justify-center items-center  text-3xl border-b-[1px] mb-4">
             Available Songs
           </div>
-          <div className=" h-[95%] overflow-auto px-16  ">
+          <div className=" h-[92%] w-full  overflow-auto md:px-16  ">
             {loading ? (
               <Loader />
             ) : (

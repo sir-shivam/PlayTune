@@ -21,11 +21,15 @@ const [isPrivate, setIsPrivate] = useState(false);
 
   const createPlaylist = async () => {
     try {
+      let state = "public";
+      if(isPrivate){
+        state = "private"
+      }
       const response = await authPost("/playlist/create", {
         name: playlistName,
         thumbnail,
         songs: [],
-        private: isPrivate, 
+        visibilty: state, 
       });
 
       if (response._id) {
