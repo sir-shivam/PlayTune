@@ -44,7 +44,7 @@ const TokenRequest = () => {
 
       const formUrlEncoded = new URLSearchParams(data).toString();
 
-      const response = await axios.post("/api/oauth/token", formUrlEncoded, {
+      const response = await axios.get("/api/oauth/token", formUrlEncoded, {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
       console.log(response.data);
