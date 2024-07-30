@@ -30,7 +30,7 @@ export default function PartyModePlaylists() {
   }, []);
 
   return (
-    <div className="w-screen h-screen bg-[#0f0f0f] flex">
+    <div className="w-screen h-screen bg-[#0f0f0f] flex overflow-hidden">
     <div className=" hidden md:block">
     <Nav />
     </div>
@@ -55,7 +55,7 @@ export default function PartyModePlaylists() {
     {
         loading? <Loader /> :
     
-      <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="w-full max-w-4xl grid  grid-cols-2 md:grid-cols-3 gap-4">
         {playlists ? playlists.map((playlist) => (
                 <PlaylistCard
                 key={JSON.stringify(playlist)}

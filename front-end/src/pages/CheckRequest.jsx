@@ -99,7 +99,7 @@ export default function CheckRequest() {
 
   return (
 <div>
-          <div className="full w-screen h-screen bg-[#0f0f0f] flex flex-col md:flex-row ">
+          <div className="full w-screen h-screen bg-[#0f0f0f] flex flex-col md:flex-row overflow-hidden ">
             <Nav />
     
             <div className="md:w-[80vw] w-full h-[93vh] mt-8 text-white  p-10 overflow-auto">
@@ -109,7 +109,7 @@ export default function CheckRequest() {
               {loading ? (
                 <Loader/>
               ) : (
-                !allReqest ? <div className='text-white h-2/5 w-full flex justify-center items-center font-bold text-2xl '> You Don't have any Friend request</div>:
+                allReqest==0 ? <div className='text-white h-2/5 w-full flex justify-center items-center font-bold text-2xl '> You Don't have any Friend request</div>:
                 <>
                   { 
                     <div>

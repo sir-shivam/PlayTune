@@ -19,13 +19,17 @@ export function SongCard({ info, playSound }) {
     sound1.addEventListener("canplay", () => {
       setTotal((sound1.duration / 60).toFixed(2));
     });
+  
 
     setlikes(info.likes.length)
+return () => {
+  sound1.removeEventListener("canplay", () => {});
+};
   }, [info.track]);
 
   return (
     <div
-      className="flex h-[6rem] hover:bg-gray-500 hover:bg-opacity-35 pl-4  p-2  rounded-md"
+      className="flex h-[6rem] hover:bg-gray-500 hover:bg-opacity-35 pl-4 mx-10 md:m-0 p-2  transition transform duration-300 ease-in-out hover:scale-105 rounded-md"
       onClick={() => {
         setSongInfo(info);
         setSongclicked(sound1);
@@ -57,4 +61,3 @@ export function SongCard({ info, playSound }) {
     </div>
   );
 }
-

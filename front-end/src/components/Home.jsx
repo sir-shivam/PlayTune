@@ -1,3 +1,4 @@
+// src/Home.js
 import React, { useContext, useEffect, useState } from "react";
 import Nav from "./nav";
 import { useNavigate } from "react-router-dom";
@@ -27,21 +28,19 @@ export default function Home() {
       }
     };
 
-
-
     const fetchInfo = async () => {
       try {
         const userInfo = await authGet("/request/view");
         setCurrentUser(userInfo);
-        setIsSinger(userInfo.singer); 
+        setIsSinger(userInfo.singer);
       } catch (error) {
         console.error("Error fetching user info:", error);
       }
     };
+
     getData();
     fetchInfo();
-  }, []);
-
+  }, [setCurrentUser]);
 
   const getColorFromName = (name) => {
     const colors = ["#f5a623", "#4a90e2", "#50e3c2", "#bd10e0", "#7ed321"];
@@ -49,9 +48,9 @@ export default function Home() {
     return colors[charCode % colors.length];
   };
 
-  const userName = currentUser.name || "User";
-    const userInitial = userName.charAt(0).toUpperCase();
-    const profileColor = getColorFromName(userName);
+  const userName = currentUser?.name || "User";
+  const userInitial = userName.charAt(0).toUpperCase();
+  const profileColor = getColorFromName(userName);
 
   const Profile = () => {
     const toggleProfile = () => {
@@ -64,15 +63,18 @@ export default function Home() {
           className="flex items-center cursor-pointer"
           onClick={toggleProfile}
         >
-          <div className="w-[60px] h-[60px] border rounded-full flex justify-center items-center overflow-hidden"  style={{ backgroundColor: profileColor }}>
+          <div
+            className="w-[60px] h-[60px] border rounded-full flex justify-center items-center text-white font-bold text-xl"
+            style={{ backgroundColor: profileColor }}
+          >
             {userInitial}
           </div>
-          <div className="ml-4 text-white">{currentUser.name}</div> 
+          <div className="ml-4 text-white">{currentUser?.name}</div>
         </div>
         {profileExpanded && (
           <div className="absolute bg-white text-black p-4 rounded-lg mt-2 shadow-lg right-0 w-[200px]">
-            <div className="text-lg font-bold">{currentUser.name}</div>
-            <div>Email: {currentUser.email}</div> 
+            <div className="text-lg font-bold">{currentUser?.name}</div>
+            <div>Email: {currentUser?.email}</div>
             <div>Role: {isSinger ? "Singer" : "Listener"}</div>
           </div>
         )}
@@ -80,29 +82,24 @@ export default function Home() {
     );
   };
 
-  const PlaylistCard1 = ({ info, playlistId }) => {
-    const navigate = useNavigate();
-    return (
-      <div
-        className="w-full h-full border rounded-2xl m-4 p-4 flex flex-col items-center cursor-pointer"
-        onClick={() => {
-          navigate("/playlist/view/" + playlistId);
-        }}
-      >
-        <div className="w-[80%] h-[20%] text-white text-2xl flex justify-center items-center">
-          {info.name}
-        </div>
-        <img
-          alt="thumbnail"
-          src={info.thumbnail}
-          className="w-[80%] h-[65%] mt-3 rounded-xl object-cover"
-        />
+  const PlaylistCard1 = ({ info, playlistId }) => (
+    <div
+      className="w-full h-full border rounded-2xl m-4 p-4 flex flex-col items-center cursor-pointer transition-transform transform hover:scale-105"
+      onClick={() => navigate("/playlist/view/" + playlistId)}
+    >
+      <div className="w-[80%] h-[20%] text-white text-2xl flex justify-center items-center">
+        {info.name}
       </div>
-    );
-  };
+      <img
+        alt="thumbnail"
+        src={info.thumbnail}
+        className="w-[80%] h-[65%] mt-3 rounded-xl object-cover"
+      />
+    </div>
+  );
 
   return (
-    <div className="w-full h-screen bg-[#0f0f0f] flex flex-col md:flex-row">
+    <div className="w-full h-screen bg-[#0f0f0f] flex flex-col md:flex-row overflow-hidden">
       <div className="hidden md:block">
         <Nav />
       </div>
@@ -112,13 +109,13 @@ export default function Home() {
         </div>
         <div className="flex flex-col md:flex-row items-center md:items-start md:h-[25%] w-full p-4 md:p-10">
           <div className="flex flex-col w-full md:w-[70%] text-white">
-            <div className="text-4xl md:text-7xl mb-4">Discover</div>
+            <div className="text-4xl md:text-7xl mb-4 font-bold">Discover</div>
             <div className="flex flex-wrap">
               {["Popular", "Trending", "New", "Hot", "Charts", "Genres"].map(
                 (category, index) => (
                   <div
                     key={index}
-                    className="inline-block text-white m-2 opacity-50 cursor-pointer"
+                    className="inline-block text-white m-2 opacity-70 hover:opacity-100 transition-opacity cursor-pointer"
                   >
                     {category}
                   </div>
@@ -126,13 +123,16 @@ export default function Home() {
               )}
             </div>
           </div>
-          <div className="text-white flex mt-4 md:ml-[12%] md:mt-[1%] items-center">
-            <Profile  />
+          <div className="text-white md:flex mt-4 md:ml-[12%] md:mt-[1%] items-center hidden ">
+            <Profile />
             {isSinger && (
-              <div className="text-white border-l-2 pl-3 cursor-pointer ml-4" onClick={()=>{
-                navigate("/upload");
-              }} >
-                Upload song
+              <div
+                className="text-white border-l-2 pl-3 cursor-pointer ml-4"
+                onClick={() => {
+                  navigate("/upload");
+                }}
+              >
+                Upload Song
               </div>
             )}
           </div>
@@ -142,12 +142,11 @@ export default function Home() {
             <Loader />
           ) : (
             <div className="grid gap-4 md:gap-8 grid-cols-2 md:grid-cols-3">
-              {myList1.map((item) =>
-                item.visibilty === "public" ? (
-                  <PlaylistCard1 key={item._id} info={item} playlistId={item._id} />
-                ) : (
-                  ""
-                )
+              {myList1.map(
+                (item) =>
+                  item.visibilty === "public" && (
+                    <PlaylistCard1 key={item._id} info={item} playlistId={item._id} />
+                  )
               )}
             </div>
           )}

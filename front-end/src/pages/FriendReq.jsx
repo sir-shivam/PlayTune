@@ -134,7 +134,7 @@ export default function FriendReq() {
 
     (
         <div>
-          <div className="full w-screen h-screen bg-[#0f0f0f] flex flex-col md:flex-row ">
+          <div className="full w-screen h-screen bg-[#0f0f0f] flex flex-col md:flex-row  overflow-hidden">
             <Nav />
     
             <div className="md:w-[80vw] w-full h-[93vh] mt-8 text-white  p-10 overflow-auto">

@@ -25,11 +25,6 @@ export default function SinglePlaylist() {
         setlistDetail(response);
         setCurrentData(response.songs);
       
-
-        // console.log(response);
-
-        // setlistDetail(response);
-        // setCurrentData(response.songs);
       } catch (error) {
         console.error("Error fetching playlist data:", error);
       } finally {
@@ -44,20 +39,22 @@ export default function SinglePlaylist() {
 
   return (
     <div>
-      <div className="full w-screen h-screen   bg-[#0f0f0f] md:flex  ">
+      <div className="full w-screen h-screen   bg-[#0f0f0f] md:flex overflow-hidden ">
         <Nav />
-
-        <div className="md:w-[80vw] w-full h-[82vh] md:h-[93vh]  mt-8 text-white  p-10 overflow-auto">
+        <div>
+        <div className="h-[8%] text-white w-[80%] ml-[10%] flex justify-center items-center  text-3xl border-b-[1px] mt-2 mb-4">
+                    Playlist : {listDetail.name}{" "}
+          </div>
+        <div className="md:w-[80vw] w-full h-[65vh]  md:h-[85vh]   md:mt-8 mt-2 text-white  p-12  overflow-auto">
+          
           {loading ? (
             <Loader />
           ) : (
             <>
               {listDetail._id && (
                 <div>
-                  <div className="flex justify-center items-center font-bold text-2xl mt-[-30px] h-16 sticky ">
-                    Playlist : {listDetail.name}{" "}
-                  </div>
-                  <div className="space-y-3 h-[80%]   ">
+                  
+                  <div className="space-y-3 md:h-[80%]    ">
                     {listDetail.songs.map((item) => {
                       return (
                         <SongCard
@@ -72,6 +69,7 @@ export default function SinglePlaylist() {
               )}
             </>
           )}
+        </div>
         </div>
       </div>
     </div>

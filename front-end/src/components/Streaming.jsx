@@ -106,7 +106,7 @@ export default function Streaming() {
       )}
 
       <div
-        className={`streaming fixed bottom-6  ${
+        className={`streaming fixed bottom-6  z-10 ${
           isMinimized ? "w-20 h-20" : "w-[80vw] ml-[10%]  md:ml-[30vw] md:w-[48vw] h-[12vh] md:h-[18vh]"
         } transition-all duration-300 bg-gradient-to-br from-[#c81d77] to-[#6710c2] rounded-3xl flex items-center p-2 md:p-4 shadow-lg`}
         onClick={() => {
@@ -164,7 +164,7 @@ export default function Streaming() {
                 ></i>
                 <div
                   onClick={togglePlay}
-                  className="md:w-10 md:h-10 h-6  w-6 hover:bg-slate-700 rounded-full flex justify-center items-center"
+                  className="md:w-10 md:h-10 h-6  w-6 hover:bg-slate-700 rounded-full hover:cursor-pointer flex justify-center items-center"
                 >
                   {isPaused ? (
                     <i className="fa-solid fa-play ml-1"></i>

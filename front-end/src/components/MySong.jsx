@@ -33,7 +33,7 @@ export default function MySong() {
 
   return (
     <div>
-      <div className="full w-screen h-screen bg-[#0f0f0f] flex ">
+      <div className="full w-screen h-screen bg-[#0f0f0f] flex overflow-hidden ">
       <div className="hidden md:block">
       <Nav />
       </div>
@@ -48,7 +48,7 @@ export default function MySong() {
           {loading ? <Loader /> :
           
           
-          <div className="space-y-3 h-[95%] overflow-auto ">{
+          <div className="space-y-3 h-[95%] overflow-auto px-8 ">{
             songData.length==0 ? (<div className="text-white h-28 font-bold text-2xl flex justify-center items-center " > No Liked Songs </div>):(
             songData.map((item) => {
               return <SongCard info={item} />
