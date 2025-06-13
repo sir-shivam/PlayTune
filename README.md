@@ -1,4 +1,3 @@
-# Delta Web Task 3 - Code Overview
 
 # in this project I have used React, NodeJs and MongoDb  
 
