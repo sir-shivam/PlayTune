@@ -30,7 +30,7 @@ const Nav = () => {
         <div className="md:mb-8 mb-2 md:h-auto  h-full w-full flex justify-center items-center ">
          
           <h1 className="text-4xl font-bold text-white tracking-widest ">
-            D-Tune
+            Play-Tune
           </h1>
         </div>
         <ul className="flex md:flex-col overflow-auto md:overflow: visible h-full  p-8 border-[#0f0f0f] border-t-4 flex-row gap-4 w-full">
