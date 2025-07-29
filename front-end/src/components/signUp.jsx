@@ -65,7 +65,7 @@ const SignUp = () => {
        <div className=" w-screen h-screen bg-[#0f0f0f] flex flex-col justify-center items-center md:flex-row">
         <div className="md:w-[880px] w-screen   h-[80px] md:h-[680px]   flex flex-col md:flex-row justify-center items-center relative"><div>
         <div className="mt-[-18%]">
-            <p className="text-[#628eff]  md:text-[4rem] text-[2rem] mb-[-4%] ">D-Tune</p>
+            <p className="text-[#628eff]  md:text-[4rem] text-[2rem] mb-[-4%] ">Play-Tune</p>
             <p className="md:text-[5rem] text-[3rem]  text-white  ">Welcomes You !!</p>
             {/* <p className='text-[1.3rem] text-white underline mt-[-4%] ml-[1rem] '>Play the Beat !!</p> */}
           </div>
