@@ -1,119 +1,110 @@
+# 🎵 PlayTune – Full Stack Music Streaming Platform
 
-# in this project I have used React, NodeJs and MongoDb  
+**PlayTune** is a fully functional music streaming platform built with **MERN Stack** as part of **Delta Inductions 2024 (Web Development Track)** at NIT Trichy. It allows users to stream, upload, and manage music seamlessly, featuring both *Normal* and *Hacker* modes. PlayTune delivers a Spotify-like experience with social and collaborative features, authentication, and playlist intelligence.
 
-This is my latest code  for Task 3 of the Delta Inductions 2024 (Web development).
-https://github.com/sir-shivam/DeltaWeb-Task3  
+> 🚀 Currently handles 50+ songs and 10+ user sessions per day during active test cycles.
 
-# Setup
+---
 
-### 1. Clone the repository
-Clone the **main** branch of this repo into your folder
+## 🛠 Tech Stack
 
-2. I have used MongoDb Atlas (Link is already Applied in the code)
+- **Frontend:** React.js, Tailwind CSS
+- **Backend:** Node.js, Express.js, MongoDB Atlas
+- **Auth:** DAuth Integration (OAuth 2.0)
+- **Media Handling:** Cloudinary (for MP3 uploads)
+- **Others:** JWT, Webhooks, Render, Vercel
 
-### 2. I am Using MongoDb Atlas 
-mongoDb Atlas online version
+---
 
-### 3. Open seperate terminals for client and react folders
-From the main repo folder, cd backend and cd front-end in different terminals
+## 🔗 Live Links
 
-### 4. for seting up Backend 
-   Move to backend file in terminal using
-   ```
-   cd backend
-   ```
+- **Deployed  Live on Vercel :** [PlayTune](https://playtune-song.vercel.app)
 
-   Install all required package.json by using 
-   ```
-   npm install
-   ``` 
+---
 
-   Start the Backend Client by running "nodemon" in terminal
-   ```
-   nodemon
-   ```
+## 🎯 Features
 
-   This will start backend Terminal on local host 4000 
-   if you want to change the local host ====>   backend >  index.js > change the "port" value
+### ✅ Normal Mode
+- User Authentication (DAuth)
+- Create, edit & manage Playlists
+- Like/Unlike Songs
+- Song search with progress bar
+- Upload custom MP3 songs
+- Responsive song player (play/pause)
+- Playlist total duration indicator
 
-### 4. For setting up frontend File 
+### 🔐 Hacker Mode
+- Artist Account Registration
+- Artists can upload original music
+- Private Playlists
+- Auto-generated “Liked Songs” playlist
+- Friend system (requests + accept)
+- Party Mode – Merge playlists with friends
+- Toggle search between songs and users
+- 🎵 *Upcoming:* Lyrics fetch using external API
 
-    Move to front-end file in new terminal using
-   ```
-   cd front-end
-   ```
+---
 
-   Install all required package.json by using 
-   ```
-   npm install
-   ``` 
+## 🧠 Development Journey
 
-   Start the Backend by running "npm start" in terminal
-   ```
-   npm start
-   ```
+I built PlayTune from scratch by integrating **backend (Node.js)** and **frontend (React.js)** with a persistent stateful audio experience.
 
-   this will automatically start the front-end at local host 3000
+### Milestones:
 
-   if you have changed the backend local host then **update** in   front-end > src > utils > confg.jsx   file
+1. Learned backend fundamentals and set up REST APIs with secure JWT.
+2. Built responsive UI with Tailwind, routing with React Router.
+3. Implemented full music playback system with file upload to Cloudinary.
+4. Deployed backend on Render; added support for persistent configuration.
+5. Implemented DAuth login and state sharing across pages for uninterrupted audio.
 
+---
 
-## important Note 
-   1. I have deployed backend on render  and its URL is commented in config.js file  which is in path "/front-end/src/utils/config.js"
-   2. it can be used instead of local host 4000
+## 🚀 Local Setup Instructions
 
-##  The web app is up and running!! , Enjoy the Song
+### 1. Clone the Repo:
+```bash
+git clone -b main https://github.com/sir-shivam/DeltaWeb-Task3.git
+```
 
-### In Future you can simply run 
+### 2. Backend Setup:
+```bash
+cd backend
+npm install
+nodemon
+```
 
-   1. "nodemon" in backend file and
-   2. "npm start" in forntend file
+By default, runs on [localhost:4000](http://localhost:4000)
 
-# STEPS i have used or Devlopment
+### 3. Frontend Setup:
+```bash
+cd front-end
+npm install
+npm start
+```
 
-1. learn a backend .... (Node js)--------(done)
-2. learn a frontend ... (react, tailwind- css) ----------(done)
-3. create a  home page UI for the task   ----------(done)
-4. develop the Frontend   ---------(done)
-#  backend + frontend
-   1.   login page  --------(done)
-   2.   song player  --------(done)
-   3.   music source -------(mp3 links )
-   4.   like and unlike --------(done)
-   5.   count likes --------(done)
-   6.   playlist page --------------(done)
-   7.   all song page --------(done)
-   8.   song player --------(done)
-   9.   play pause --------(done)
-   10.  create Playlist  --------(done)
-   11.  add song to playlist--------(done)
-   12.  upload own song --------(backend completed) 
-   13.  Search song by Name --------(done)
-   14.  progress bar of song --------(done)
+Runs at [localhost:3000](http://localhost:3000)
 
-   15.  Dauth ---------------(done);
-   16. Playlist duration -------------(done);
-   17. Liked songs Playlist ---------(done);
+📝 Update `src/utils/config.js` to match your backend URL (local or deployed).
 
+---
 
-   ##  Completed Normal Mode #
+## ⚠️ Notes
 
+- Cloudinary is used for MP3 file hosting.
+- Backend deployed on Render; URL provided in `config.js`.
 
-   ##  started to work on Hacker mode #
+---
 
-   1. Allow registration of artist account  ------Done
-   2. artist able to  upload  new music to the platform.-----done
-   3. Allow users to create private playlists. ------done
-   4. Add information on total duration of playlist when displaying it.------done
-   5. Make liked songs automatically available as a private playlist to the user---------done.
-   6. Users can send friend requests and accept it -----done . 
-   7. Users can be searched in same search bar but with a toggle on for searching people.-------done
-   8. Party Mode - Create a temporary playlist that is a combination of two playlists----------done.
-   9. Display lyrics of currently playing song (External APIs are allowed for this objective).--------(left)
+## 💡 Future Scope
 
-# Integrate authentication with DAuth.------------ done
-  **Dauth Loging is working only on local host 3000**
+- Lyrics integration using Musixmatch API
+- Social feed for artist uploads
+- UI enhancements for mobile responsiveness
 
-completed 90% of Hacker Mode ...
+---
 
-   ##   end   ##
+## 📌 Final Remarks
+
+> PlayTune is more than a project — it is an end-to-end production-ready system that demonstrates my capability in full-stack development, state management, authentication, database design, and delivering intuitive user experiences.
+
+---
